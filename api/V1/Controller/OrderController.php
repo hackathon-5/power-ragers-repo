@@ -103,7 +103,7 @@ class OrderController {
 				$customer_name = $order->getCustomerName();
 				$item_name = $order->getItemName();
 
-				$message = $client->account->messages->create(array(
+				$message = $this->app['twilio']->account->messages->create(array(
 					"From" => "8433528360",
 					"To" => $customer_phone_number,
 					"Body" => "Hey $customer_name, your $item_name is ready!",
