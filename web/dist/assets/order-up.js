@@ -130,93 +130,6 @@ define('order-up/controllers/place-order', ['exports', 'ember'], function (expor
 	});
 
 });
-define('order-up/helpers/ago', ['exports', 'ember', 'order-up/helpers/moment-from-now'], function (exports, Ember, Helper) {
-
-  'use strict';
-
-  exports['default'] = Helper['default'].extend({
-    compute: function compute() {
-      Ember['default'].deprecate('ember-moment: `ago` helper has been renamed to `moment-from-now`');
-      return this._super.apply(this, arguments);
-    }
-  });
-
-});
-define('order-up/helpers/duration', ['exports', 'ember', 'order-up/helpers/moment-duration'], function (exports, Ember, Helper) {
-
-  'use strict';
-
-  exports['default'] = Helper['default'].extend({
-    compute: function compute() {
-      Ember['default'].deprecate('ember-moment: `duration` helper has been renamed to `moment-duration`');
-      return this._super.apply(this, arguments);
-    }
-  });
-
-});
-define('order-up/helpers/format-money', ['exports', 'accounting/helpers/format-money'], function (exports, Helper) {
-
-	'use strict';
-
-	exports['default'] = Helper['default'];
-
-});
-define('order-up/helpers/format-number', ['exports', 'accounting/helpers/format-number'], function (exports, Helper) {
-
-	'use strict';
-
-	exports['default'] = Helper['default'];
-
-});
-define('order-up/helpers/moment-duration', ['exports', 'ember-moment/helpers/moment-duration'], function (exports, moment_duration) {
-
-	'use strict';
-
-
-
-	exports.default = moment_duration.default;
-
-});
-define('order-up/helpers/moment-format', ['exports', 'ember', 'order-up/config/environment', 'ember-moment/helpers/moment-format'], function (exports, Ember, config, Helper) {
-
-  'use strict';
-
-  exports['default'] = Helper['default'].extend({
-    globalOutputFormat: Ember['default'].get(config['default'], 'moment.outputFormat'),
-    globalAllowEmpty: !!Ember['default'].get(config['default'], 'moment.allowEmpty')
-  });
-
-});
-define('order-up/helpers/moment-from-now', ['exports', 'ember', 'order-up/config/environment', 'ember-moment/helpers/moment-from-now'], function (exports, Ember, config, Helper) {
-
-  'use strict';
-
-  exports['default'] = Helper['default'].extend({
-    globalAllowEmpty: !!Ember['default'].get(config['default'], 'moment.allowEmpty')
-  });
-
-});
-define('order-up/helpers/moment-to-now', ['exports', 'ember', 'order-up/config/environment', 'ember-moment/helpers/moment-to-now'], function (exports, Ember, config, Helper) {
-
-  'use strict';
-
-  exports['default'] = Helper['default'].extend({
-    globalAllowEmpty: !!Ember['default'].get(config['default'], 'moment.allowEmpty')
-  });
-
-});
-define('order-up/helpers/moment', ['exports', 'ember', 'order-up/helpers/moment-format'], function (exports, Ember, Helper) {
-
-  'use strict';
-
-  exports['default'] = Helper['default'].extend({
-    compute: function compute() {
-      Ember['default'].deprecate('ember-moment: `moment` helper has been renamed to `moment-format`');
-      return this._super.apply(this, arguments);
-    }
-  });
-
-});
 define('order-up/initializers/export-application-global', ['exports', 'ember', 'order-up/config/environment'], function (exports, Ember, config) {
 
   'use strict';
@@ -582,7 +495,7 @@ define('order-up/templates/application', ['exports'], function (exports) {
         var el6 = dom.createElement("img");
         dom.setAttribute(el6,"class","logo");
         dom.setAttribute(el6,"src","/assets/logo.png");
-        dom.setAttribute(el6,"alt","Order Time");
+        dom.setAttribute(el6,"alt","Logo");
         dom.appendChild(el5, el6);
         dom.appendChild(el4, el5);
         dom.appendChild(el3, el4);
@@ -881,11 +794,11 @@ define('order-up/templates/confirmation', ['exports'], function (exports) {
           "loc": {
             "source": null,
             "start": {
-              "line": 10,
+              "line": 17,
               "column": 3
             },
             "end": {
-              "line": 10,
+              "line": 17,
               "column": 76
             }
           },
@@ -921,7 +834,7 @@ define('order-up/templates/confirmation', ['exports'], function (exports) {
             "column": 0
           },
           "end": {
-            "line": 13,
+            "line": 20,
             "column": 10
           }
         },
@@ -934,6 +847,41 @@ define('order-up/templates/confirmation', ['exports'], function (exports) {
         var el0 = dom.createDocumentFragment();
         var el1 = dom.createElement("section");
         dom.setAttribute(el1,"class","dark-bg");
+        var el2 = dom.createTextNode("\n	");
+        dom.appendChild(el1, el2);
+        var el2 = dom.createElement("div");
+        dom.setAttribute(el2,"class","row");
+        var el3 = dom.createTextNode("\n		");
+        dom.appendChild(el2, el3);
+        var el3 = dom.createElement("div");
+        dom.setAttribute(el3,"class","small-12 columns animation-wrapper text-center");
+        var el4 = dom.createTextNode("\n			");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("img");
+        dom.setAttribute(el4,"class","truck");
+        dom.setAttribute(el4,"src","/assets/images/truck.png");
+        dom.setAttribute(el4,"alt","Truck");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n			");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("img");
+        dom.setAttribute(el4,"class","wing1");
+        dom.setAttribute(el4,"src","/assets/images/wing.png");
+        dom.setAttribute(el4,"alt","Wing 1");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n			");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createElement("img");
+        dom.setAttribute(el4,"class","wing2");
+        dom.setAttribute(el4,"src","/assets/images/wing2.png");
+        dom.setAttribute(el4,"alt","Wing 2");
+        dom.appendChild(el3, el4);
+        var el4 = dom.createTextNode("\n		");
+        dom.appendChild(el3, el4);
+        dom.appendChild(el2, el3);
+        var el3 = dom.createTextNode("\n	");
+        dom.appendChild(el2, el3);
+        dom.appendChild(el1, el2);
         var el2 = dom.createTextNode("\n	");
         dom.appendChild(el1, el2);
         var el2 = dom.createElement("div");
@@ -985,11 +933,11 @@ define('order-up/templates/confirmation', ['exports'], function (exports) {
       },
       buildRenderNodes: function buildRenderNodes(dom, fragment, contextualElement) {
         var morphs = new Array(1);
-        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0, 3, 1]),1,1);
+        morphs[0] = dom.createMorphAt(dom.childAt(fragment, [0, 5, 1]),1,1);
         return morphs;
       },
       statements: [
-        ["block","link-to",["index"],[],0,null,["loc",[null,[10,3],[10,88]]]]
+        ["block","link-to",["index"],[],0,null,["loc",[null,[17,3],[17,88]]]]
       ],
       locals: [],
       templates: [child0]
@@ -2403,7 +2351,7 @@ catch(err) {
 if (runningTests) {
   require("order-up/tests/test-helper");
 } else {
-  require("order-up/app")["default"].create({"name":"order-up","version":"0.0.0+205770f4"});
+  require("order-up/app")["default"].create({"name":"order-up","version":"0.0.0+f92c6ff8"});
 }
 
 /* jshint ignore:end */
