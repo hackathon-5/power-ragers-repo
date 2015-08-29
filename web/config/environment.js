@@ -14,12 +14,21 @@ module.exports = function(environment) {
     },
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' api.tiles.mapbox.com api.mapbox.com checkout.stripe.com",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' api.tiles.mapbox.com api.mapbox.com checkout.stripe.com cdn.rawgit.com",
       'font-src': "'self' fonts.gstatic.com",
       'frame-src': "*",
-      'connect-src': "'self' a.tiles.mapbox.com",
+      'connect-src': "'self' a.tiles.mapbox.com http://52.20.248.36",
       'img-src': "'self' data: a.tiles.mapbox.com q.stripe.com",
       'style-src': "'self' 'unsafe-inline' fonts.googleapis.com api.mapbox.com api.tiles.mapbox.com",
+    },
+    xdomain: {
+         src: "//cdn.rawgit.com/jpillora/xdomain/0.6.17/dist/xdomain.min.js",
+         debugSrc: "//cdn.rawgit.com/jpillora/xdomain/0.6.17/dist/xdomain.js",
+         slaves: {
+	         "http://52.20.248.36": "/proxy.html"
+         },
+         debug: false,
+         timeout: 15e3
     },
     APP: {
       // Here you can pass flags/options to your application instance
