@@ -30,7 +30,6 @@ class UserController {
 		$user = new User();
 		$user->setEmail($this->request_body->email);
 		$user->setPassword(md5($this->request_body->password));
-		$user->setFirm(FirmQuery::create()->findPK($this->request_body->firm));
 		$user->save();
 
 		$token = new AccessToken();
