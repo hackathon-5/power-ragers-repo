@@ -36,6 +36,7 @@ class OrderController {
 
 		// And delete it
 		$order->delete();
+		return "Order, $id, deleted successfully.";
 	}
 
 	public function placeOrder()
