@@ -17,9 +17,13 @@ h3 {
 	letter-spacing: 1px;
 	text-transform: uppercase;
 }
+
 p {
 	font-style: italic;
 	color: $dark-grey;
+}
+p.no-margin {
+	margin: 0;
 }
 
 a {
