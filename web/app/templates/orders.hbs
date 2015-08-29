@@ -12,8 +12,8 @@
 			<h3>Menu</h3>
 			
 			<ul class="tabs" data-tab>
-				<li class="tab-title" {{action 'switchTab'}}><a>{{open.length}} Open</a></li>
-				<li class="tab-title" {{action 'switchTab'}}><a>{{closed.length}} Closed</a></li>
+				<li {{bind-attr class=":tab-title openOrders:active"}} {{action 'switchTab'}}><a>{{open.length}} Open</a></li>
+				<li {{bind-attr class=":tab-title openOrders::active"}} {{action 'switchTab'}}><a>{{closed.length}} Closed</a></li>
 			</ul>
 			<div class="tabs-content">
 				{{#if openOrders}}
