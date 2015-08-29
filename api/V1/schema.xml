@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<database name="orderup" defaultIdMethod="native" namespace="Model">
+
+  <table name="users" phpName="User">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="email" type="varchar" size="255" required="true" phpName="Email" />
+    <column name="password_hash" type="varchar" size="255" required="true" phpName="Password"/>
+    <unique>
+      <unique-column name="email" />
+    </unique>
+    <behavior name="timestampable"/>
+  </table>
+
+  <table name="access_tokens" phpName="AccessToken">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="user_id" type="integer" required="true" />
+    <column name="token_content" type="varchar" size="255" required="true"/>
+    <foreign-key foreignTable="users">
+      <reference local="user_id" foreign="id"/>
+    </foreign-key>
+    <behavior name="timestampable"/>
+  </table>
+
+  <table name="trucks" phpName="Truck">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="user_id" type="integer" required="true" />
+    <column name="name" type="varchar" size="255" required="true" phpName="Name"/>
+    <foreign-key foreignTable="users">
+      <reference local="user_id" foreign="id"/>
+    </foreign-key>
+    <behavior name="timestampable"/>
+  </table>
+
+  <table name="orders" phpName="Order">
+    <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
+    <column name="truck_id" type="integer" required="true"/>
+    <column name="item_name" type="varchar" size="255" />
+    <column name="price" type="float" required="true"/>
+    <column name="customer_name" type="varchar" size="255" required="true"/>
+    <column name="customer_email" type="varchar" size="255" required="true"/>
+    <column name="customer_phone_number" type="bigint" required="true"/>
+    <column name="open" type="boolean" size="255" />
+    <foreign-key foreignTable="trucks">
+      <reference local="truck_id" foreign="id"/>
+    </foreign-key>
+    <behavior name="timestampable" />
+  </table>
+
+</database>

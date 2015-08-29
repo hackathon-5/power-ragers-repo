@@ -1,0 +1,21 @@
+{
+  "require" : {
+    "silex/silex": "~1.2",
+    "symfony/twig-bridge": "2.1.*",
+    "propel/propel": "~2.0@dev",
+    "propel/propel-service-provider": "2.*@dev",
+    "guzzle/guzzle": "~3.7",
+    "mandrill/mandrill": "1.0.*",
+    "predis/predis": "~1.0",
+    "ext-mbstring": "*",
+    "monolog/monolog": "~1.7",
+    "twilio/sdk": "dev-master"
+  },
+  "autoload" : {
+    "psr-0": {
+      "Controller": "V1/",
+      "Model": "V1/Model/generated-classes/",
+      "Utility": "V1/"
+    }
+  }
+}

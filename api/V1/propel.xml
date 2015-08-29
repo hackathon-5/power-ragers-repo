@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<config>
+    <propel>
+        <database>
+            <connections>
+                <connection id="truckyeah">
+                    <adapter>pgsql</adapter>
+                    <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
+                    <dsn>pgsql:host=52.20.248.36;dbname=orderup</dsn>
+                    <user>Tree</user>
+                    <password>TreeTruckTron</password>
+                </connection>
+            </connections>
+        </database>
+        <runtime>
+            <defaultConnection>truckyeah</defaultConnection>
+            <connection>truckyeah</connection>
+        </runtime>
+        <generator>
+            <defaultConnection>truckyeah</defaultConnection>
+            <connection>truckyeah</connection>
+        </generator>
+    </propel>
+</config>
