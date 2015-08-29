@@ -29,7 +29,7 @@ class Utils
 
 	public function listObjectIDs($objects)
 	{
-		return $this->listParameterValues('id', $objects);
+		return $this->listParameterValues('Id', $objects);
 	}
 
 	public function listParameterValues($parameter, $parentObjects)
