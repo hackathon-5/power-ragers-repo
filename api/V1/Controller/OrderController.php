@@ -112,7 +112,7 @@ class OrderController {
 		}
 		if(array_key_exists('customer_phone_number', $input))
 		{
-			$order->setCustomerPhoneNumber($input->customer_phone_number);
+			$order->setCustomerPhoneNumber($input['customer_phone_number']);
 		}
 		$order->save();
 
