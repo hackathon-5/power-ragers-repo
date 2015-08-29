@@ -52,7 +52,7 @@ class OrderController {
 			'item_name',
 			'price'
 		);
-		$this->app['utils']->verifyInputIsntNull($input);
+		$this->app['utils']->verifyInputIsntNull($input, $requiredKeys);
 
 		// Create new Order object
 		$order = new Order();
@@ -75,11 +75,11 @@ class OrderController {
 		{
 			throw new Exception('Missing or malformed request.', 422);
 		}
-		$input = $this->request_body['order'];
-		$requiredKeys = array(
-			'open'
-		);
-		$this->app['utils']->verifyInputIsntNull($input);
+		// $input = $this->request_body['order'];
+		// $requiredKeys = array(
+		// 	'open'
+		// );
+		// $this->app['utils']->verifyInputIsntNull($input, $requiredKeys);
 
 		// Update the order
 		$order = OrderQuery::create()
