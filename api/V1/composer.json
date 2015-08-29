@@ -9,13 +9,14 @@
     "predis/predis": "~1.0",
     "ext-mbstring": "*",
     "monolog/monolog": "~1.7",
-    "twilio/sdk": "dev-master"
+    "twilio/sdk": "dev-master",
+    "stripe/stripe-php": "1.*"
   },
   "autoload" : {
     "psr-0": {
-      "Controller\\": "controllers/",
-      "Model\\": "generated-classes/",
-      "Utility\\": "utility/"
+      "Controller": "./",
+      "Model": "./generated-classes/",
+      "Utility": "./"
     }
   }
 }

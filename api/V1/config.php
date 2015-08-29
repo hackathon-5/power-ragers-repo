@@ -1,6 +1,6 @@
 <?php
 
-use Exception;
+use \Exception;
 use Silex\Application;
 use Silex\ControllerProviderInterface;
 use Silex\ServiceProviderInterface;
@@ -17,6 +17,8 @@ $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 
 // Configure error messages
 $app->error(function (Exception $e) {
+	echo $e->getTraceAsString();
+	exit();
 	return new JsonResponse(array(
 		'error' => $e->getCode(),
 		'message' => $e->getMessage()
@@ -36,7 +38,7 @@ $app['twilio'] = new Services_Twilio($twilioSID, $twilioToken);
 
 // Configure utils
 $app['utils'] = $app->share(function ($app) {
-	return new Utils($app['response']);
+	return new Utils();
 });
 
 ?>

@@ -36,9 +36,11 @@
     <column name="truck_id" type="integer" required="true"/>
     <column name="item_name" type="varchar" size="255" />
     <column name="price" type="float" required="true"/>
+    <column name="charge_id" type="varchar" size="255" required="true"/>
+    <column name="customer_id" type="varchar" size="255" required="true"/>
     <column name="customer_name" type="varchar" size="255" required="true"/>
     <column name="customer_email" type="varchar" size="255" required="true"/>
-    <column name="customer_phone_number" type="bigint" required="true"/>
+    <column name="customer_phone_number" type="varchar" size="255"/>
     <column name="open" type="boolean" defaultExpr="'t'::boolean"/>
     <foreign-key foreignTable="trucks">
       <reference local="truck_id" foreign="id"/>

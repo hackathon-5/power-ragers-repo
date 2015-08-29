@@ -29,7 +29,23 @@ class Utils
 
 	public function listObjectIDs($objects)
 	{
-		return $this->listParameterValues('id', $objects);
+		return $this->listParameterValues('Id', $objects);
+	}
+
+	public function listParameterValues($parameter, $parentObjects)
+	{
+		// Loop through objects and grab parameters
+		$parameters = array();
+		foreach($parentObjects as $parent)
+		{
+			if(array_key_exists($parameter, $parent))
+			{
+				array_push($parameters, $parent[$parameter]);
+			}
+		}
+
+		// Return parameters
+		return $parameters;
 	}
 
 	public function verifyInputIsntNull($params, $requiredParams)
