@@ -42,7 +42,8 @@ class OrderController {
 	public function placeOrder()
 	{
 		// Make sure request is well formated
-		if(!array_key_exists('order', $this->request_body))
+		if(!array_key_exists('order', $this->request_body) ||
+		   !array_key_exists('token', $this->request_body))
 		{
 			throw new Exception('Missing or malformed request.', 422);
 		}
@@ -54,6 +55,7 @@ class OrderController {
 			'price'
 		);
 		$this->app['utils']->verifyInputIsntNull($input, $requiredKeys);
+		$input['token'] - $this->request_body['token'];
 
 		// Create new Order object
 		$order = new Order();
@@ -66,11 +68,42 @@ class OrderController {
 		{
 			$order->setCustomerPhoneNumber($input['customer_phone_number']);
 		}
+
+		// Pay for order
+		$payment = $this->payForOrder($input);
+		// Add order info to order
+		$order->setChargeId($payment['charge_id']);
+		$order->setCustomerId($payment['customer_id']);
 		// Save the Order to the db
 		$order->save();
 
 		// Return Order objet
 		return array('order' => $order->toArray());
+	}
+
+	protected function payForOrder($order)
+	{
+		// Setup Stripe
+		\Stripe\Stripe::setApiKey($this->app['stripe_keys']['secret_key']);
+
+		// Create a new customer
+		$customer = \Stripe\Customer::create(array(
+			'email' => $order['customer_email'],
+			'card'  => $order['token']
+		));
+
+		// Pay for order
+		$charge = \Stripe\Charge::create(array(
+			'customer' => $customer->id,
+			'amount'   => $order['price']*100,
+			'currency' => 'usd'
+		));
+
+		// Return charge object
+		return array(
+			'charge_id' => $charge->id,
+			'customer_id' => $customer->id
+		);
 	}
 
 	public function updateOrder($id)
