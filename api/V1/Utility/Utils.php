@@ -60,16 +60,16 @@ class Utils
 			$sanatizedOutput = array();
 			if($this->isAssocArray($child))
 			{
-				foreach($output as $key => $value)
+				foreach($child as $key => $value)
 				{
-					$sanatizedOutput[lcfirst($key)] = $this->serializePropelOutput($value);
+					$sanatizedOutput[lcfirst($key)] = $this->serializePropelChildObjects($value);
 				}
 			}
 			else
 			{
-				foreach($output as $key => $value)
+				foreach($child as $key => $value)
 				{
-					$sanatizedOutput[$key] = $this->serializePropelOutput($value);
+					$sanatizedOutput[$key] = $this->serializePropelChildObjects($value);
 				}
 			}
 		}
