@@ -48,7 +48,7 @@ class OrderController {
 		$input = $this->request_body['order'];
 		$requiredKeys = array(
 			'customer_name',
-			'customer_phone_number',
+			'customer_email',
 			'item_name',
 			'price'
 		);
