@@ -17,6 +17,8 @@ $app->register(new Silex\Provider\ServiceControllerServiceProvider());
 
 // Configure error messages
 $app->error(function (Exception $e) {
+	echo $e->getTraceAsString();
+	exit();
 	return new JsonResponse(array(
 		'error' => $e->getCode(),
 		'message' => $e->getMessage()
