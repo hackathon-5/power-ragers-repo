@@ -16,7 +16,7 @@ class TruckController {
 
 	public function __construct($app, $request)
 	{
-		parent::__construct($app);
+		//parent::__construct($app);
 
 		$this->app = $app;
 		$this->request = $request;
