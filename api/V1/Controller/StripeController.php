@@ -76,5 +76,5 @@ class StripeController extends \Stripe
 			'customerId' => $customer->id
 		);
 	}
-
+}
 ?>
