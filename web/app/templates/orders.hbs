@@ -27,7 +27,7 @@
 								<p><img src="/assets/icons/person.png" alt="Customer"/>by {{order.customerName}}</p>
 							</div>
 							<div class="small-4 columns margin-top">
-								<button class="button small radius">
+								<button class="button small radius" {{action 'closeOrder' order}}>
 									<p class="price">${{order.price}}</p>
 									Close
 								</button>

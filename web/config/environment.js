@@ -30,6 +30,9 @@ module.exports = function(environment) {
          debug: false,
          timeout: 15e3
     },
+    'ember-cli-notifications': {
+    	includeFontAwesome: false
+	},
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
