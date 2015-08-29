@@ -2,9 +2,9 @@
 
 namespace Controller;
 
-use Silex\Application;
+use \Exception;
 use Model\OrderQuery;
-use Exception;
+use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -28,7 +28,8 @@ class TruckController {
 	{
 		$orders = OrderQuery::create()
 				->filterByTruckId($id)
-				->find();
+				->find()
+				->toArray();
 
 		if(null === $orders)
 		{

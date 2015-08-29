@@ -2,10 +2,10 @@
 
 namespace Controller;
 
-use Silex\Application;
+use \Exception;
 use Model\Order;
 use Model\OrderQuery;
-use Exception;
+use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -60,8 +60,7 @@ class OrderController {
 		$order->setItemName($input->item_name);
 		$order->setPrice($input->price);
 		$order->setCustomerName($input->customer_name);
-		//$order->setCustomerEmail($input->customer_email);
-		$order->setCustomerPhoneNumber($input->customer_phone_number);
+		$order->setCustomerEmail($input->customer_email);
 		// Save the Order to the db
 		$order->save();
 
@@ -90,6 +89,7 @@ class OrderController {
 			throw new Exception("Order, $id, not found.", 404);
 		}
 		$order->setOpen($input->open);
+		$order->setCustomerPhoneNumber($input->customer_phone_number);
 		$order->save();
 
 		// If the order is ready, alert the customer
