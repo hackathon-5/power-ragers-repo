@@ -14,8 +14,8 @@ export default Ember.Route.extend({
 			      var order = route.store.createRecord('order', {
 				      customerName: route.controller.customerName,
 				      customerEmail: token.email,
-				      itemName: 'Mac & Cheese',
-				      price: 6,
+				      itemName: route.controller.get('menuItem.title'),
+				      price: route.controller.get('menuItem.price'),
 				      customerPhoneNumber: route.controller.phoneNumber,
 				      token: token.id
 			      });
@@ -35,9 +35,9 @@ export default Ember.Route.extend({
 			  });
 
 			  handler.open({
-			      name: 'Mac & Cheese',
-			      description: 'Delicious!',
-			      amount: 600
+			      name: route.controller.get('menuItem.title'),
+			      description: route.controller.get('menuItem.description'),
+			      amount: route.controller.menuItem.price*100
 			  });
 			
 			  // Close Checkout on page navigation
