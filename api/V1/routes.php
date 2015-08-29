@@ -50,7 +50,7 @@ $app->get($baseurl.'/time', function(Request $request) use ($app) {
 
 // Trucks
 $app->get($baseurl.'/trucks/{id}', function(Request $request, $id) use ($app) {
-		$controller = new OrderController($app, $request);
+		$controller = new TruckController($app, $request);
 
 		$response = new JsonResponse($controller->getTruck($id));
 		$response->send();
