@@ -5,6 +5,7 @@ ini_set('display_errors', '1');
 
 // Autoload dependencies
 require_once __DIR__.'/vendor/autoload.php';
+require_once __DIR__.'/generated-conf/config.php';
 
 // Load Silex app
 use Silex\Application;

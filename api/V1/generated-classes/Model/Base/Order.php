@@ -89,6 +89,18 @@ abstract class Order implements ActiveRecordInterface
     protected $price;
 
     /**
+     * The value for the charge_id field.
+     * @var        string
+     */
+    protected $charge_id;
+
+    /**
+     * The value for the customer_id field.
+     * @var        string
+     */
+    protected $customer_id;
+
+    /**
      * The value for the customer_name field.
      * @var        string
      */
@@ -408,6 +420,26 @@ abstract class Order implements ActiveRecordInterface
     }
 
     /**
+     * Get the [charge_id] column value.
+     *
+     * @return string
+     */
+    public function getChargeId()
+    {
+        return $this->charge_id;
+    }
+
+    /**
+     * Get the [customer_id] column value.
+     *
+     * @return string
+     */
+    public function getCustomerId()
+    {
+        return $this->customer_id;
+    }
+
+    /**
      * Get the [customer_name] column value.
      *
      * @return string
@@ -580,6 +612,46 @@ abstract class Order implements ActiveRecordInterface
 
         return $this;
     } // setPrice()
+
+    /**
+     * Set the value of [charge_id] column.
+     *
+     * @param string $v new value
+     * @return $this|\Model\Order The current object (for fluent API support)
+     */
+    public function setChargeId($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->charge_id !== $v) {
+            $this->charge_id = $v;
+            $this->modifiedColumns[OrderTableMap::COL_CHARGE_ID] = true;
+        }
+
+        return $this;
+    } // setChargeId()
+
+    /**
+     * Set the value of [customer_id] column.
+     *
+     * @param string $v new value
+     * @return $this|\Model\Order The current object (for fluent API support)
+     */
+    public function setCustomerId($v)
+    {
+        if ($v !== null) {
+            $v = (string) $v;
+        }
+
+        if ($this->customer_id !== $v) {
+            $this->customer_id = $v;
+            $this->modifiedColumns[OrderTableMap::COL_CUSTOMER_ID] = true;
+        }
+
+        return $this;
+    } // setCustomerId()
 
     /**
      * Set the value of [customer_name] column.
@@ -757,22 +829,28 @@ abstract class Order implements ActiveRecordInterface
             $col = $row[TableMap::TYPE_NUM == $indexType ? 3 + $startcol : OrderTableMap::translateFieldName('Price', TableMap::TYPE_PHPNAME, $indexType)];
             $this->price = (null !== $col) ? (double) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : OrderTableMap::translateFieldName('CustomerName', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 4 + $startcol : OrderTableMap::translateFieldName('ChargeId', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->charge_id = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : OrderTableMap::translateFieldName('CustomerId', TableMap::TYPE_PHPNAME, $indexType)];
+            $this->customer_id = (null !== $col) ? (string) $col : null;
+
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : OrderTableMap::translateFieldName('CustomerName', TableMap::TYPE_PHPNAME, $indexType)];
             $this->customer_name = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 5 + $startcol : OrderTableMap::translateFieldName('CustomerEmail', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : OrderTableMap::translateFieldName('CustomerEmail', TableMap::TYPE_PHPNAME, $indexType)];
             $this->customer_email = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 6 + $startcol : OrderTableMap::translateFieldName('CustomerPhoneNumber', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 8 + $startcol : OrderTableMap::translateFieldName('CustomerPhoneNumber', TableMap::TYPE_PHPNAME, $indexType)];
             $this->customer_phone_number = (null !== $col) ? (string) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 7 + $startcol : OrderTableMap::translateFieldName('Open', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 9 + $startcol : OrderTableMap::translateFieldName('Open', TableMap::TYPE_PHPNAME, $indexType)];
             $this->open = (null !== $col) ? (boolean) $col : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 8 + $startcol : OrderTableMap::translateFieldName('CreatedAt', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 10 + $startcol : OrderTableMap::translateFieldName('CreatedAt', TableMap::TYPE_PHPNAME, $indexType)];
             $this->created_at = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
 
-            $col = $row[TableMap::TYPE_NUM == $indexType ? 9 + $startcol : OrderTableMap::translateFieldName('UpdatedAt', TableMap::TYPE_PHPNAME, $indexType)];
+            $col = $row[TableMap::TYPE_NUM == $indexType ? 11 + $startcol : OrderTableMap::translateFieldName('UpdatedAt', TableMap::TYPE_PHPNAME, $indexType)];
             $this->updated_at = (null !== $col) ? PropelDateTime::newInstance($col, null, 'DateTime') : null;
             $this->resetModified();
 
@@ -782,7 +860,7 @@ abstract class Order implements ActiveRecordInterface
                 $this->ensureConsistency();
             }
 
-            return $startcol + 10; // 10 = OrderTableMap::NUM_HYDRATE_COLUMNS.
+            return $startcol + 12; // 12 = OrderTableMap::NUM_HYDRATE_COLUMNS.
 
         } catch (Exception $e) {
             throw new PropelException(sprintf('Error populating %s object', '\\Model\\Order'), 0, $e);
@@ -1028,6 +1106,12 @@ abstract class Order implements ActiveRecordInterface
         if ($this->isColumnModified(OrderTableMap::COL_PRICE)) {
             $modifiedColumns[':p' . $index++]  = 'price';
         }
+        if ($this->isColumnModified(OrderTableMap::COL_CHARGE_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'charge_id';
+        }
+        if ($this->isColumnModified(OrderTableMap::COL_CUSTOMER_ID)) {
+            $modifiedColumns[':p' . $index++]  = 'customer_id';
+        }
         if ($this->isColumnModified(OrderTableMap::COL_CUSTOMER_NAME)) {
             $modifiedColumns[':p' . $index++]  = 'customer_name';
         }
@@ -1069,6 +1153,12 @@ abstract class Order implements ActiveRecordInterface
                     case 'price':
                         $stmt->bindValue($identifier, $this->price, PDO::PARAM_STR);
                         break;
+                    case 'charge_id':
+                        $stmt->bindValue($identifier, $this->charge_id, PDO::PARAM_STR);
+                        break;
+                    case 'customer_id':
+                        $stmt->bindValue($identifier, $this->customer_id, PDO::PARAM_STR);
+                        break;
                     case 'customer_name':
                         $stmt->bindValue($identifier, $this->customer_name, PDO::PARAM_STR);
                         break;
@@ -1076,7 +1166,7 @@ abstract class Order implements ActiveRecordInterface
                         $stmt->bindValue($identifier, $this->customer_email, PDO::PARAM_STR);
                         break;
                     case 'customer_phone_number':
-                        $stmt->bindValue($identifier, $this->customer_phone_number, PDO::PARAM_INT);
+                        $stmt->bindValue($identifier, $this->customer_phone_number, PDO::PARAM_STR);
                         break;
                     case 'open':
                         $stmt->bindValue($identifier, $this->open, PDO::PARAM_BOOL);
@@ -1155,21 +1245,27 @@ abstract class Order implements ActiveRecordInterface
                 return $this->getPrice();
                 break;
             case 4:
-                return $this->getCustomerName();
+                return $this->getChargeId();
                 break;
             case 5:
-                return $this->getCustomerEmail();
+                return $this->getCustomerId();
                 break;
             case 6:
-                return $this->getCustomerPhoneNumber();
+                return $this->getCustomerName();
                 break;
             case 7:
-                return $this->getOpen();
+                return $this->getCustomerEmail();
                 break;
             case 8:
-                return $this->getCreatedAt();
+                return $this->getCustomerPhoneNumber();
                 break;
             case 9:
+                return $this->getOpen();
+                break;
+            case 10:
+                return $this->getCreatedAt();
+                break;
+            case 11:
                 return $this->getUpdatedAt();
                 break;
             default:
@@ -1206,25 +1302,27 @@ abstract class Order implements ActiveRecordInterface
             $keys[1] => $this->getTruckId(),
             $keys[2] => $this->getItemName(),
             $keys[3] => $this->getPrice(),
-            $keys[4] => $this->getCustomerName(),
-            $keys[5] => $this->getCustomerEmail(),
-            $keys[6] => $this->getCustomerPhoneNumber(),
-            $keys[7] => $this->getOpen(),
-            $keys[8] => $this->getCreatedAt(),
-            $keys[9] => $this->getUpdatedAt(),
+            $keys[4] => $this->getChargeId(),
+            $keys[5] => $this->getCustomerId(),
+            $keys[6] => $this->getCustomerName(),
+            $keys[7] => $this->getCustomerEmail(),
+            $keys[8] => $this->getCustomerPhoneNumber(),
+            $keys[9] => $this->getOpen(),
+            $keys[10] => $this->getCreatedAt(),
+            $keys[11] => $this->getUpdatedAt(),
         );
 
         $utc = new \DateTimeZone('utc');
-        if ($result[$keys[8]] instanceof \DateTime) {
+        if ($result[$keys[10]] instanceof \DateTime) {
             // When changing timezone we don't want to change existing instances
-            $dateTime = clone $result[$keys[8]];
-            $result[$keys[8]] = $dateTime->setTimezone($utc)->format('Y-m-d\TH:i:s\Z');
+            $dateTime = clone $result[$keys[10]];
+            $result[$keys[10]] = $dateTime->setTimezone($utc)->format('Y-m-d\TH:i:s\Z');
         }
 
-        if ($result[$keys[9]] instanceof \DateTime) {
+        if ($result[$keys[11]] instanceof \DateTime) {
             // When changing timezone we don't want to change existing instances
-            $dateTime = clone $result[$keys[9]];
-            $result[$keys[9]] = $dateTime->setTimezone($utc)->format('Y-m-d\TH:i:s\Z');
+            $dateTime = clone $result[$keys[11]];
+            $result[$keys[11]] = $dateTime->setTimezone($utc)->format('Y-m-d\TH:i:s\Z');
         }
 
         $virtualColumns = $this->virtualColumns;
@@ -1295,21 +1393,27 @@ abstract class Order implements ActiveRecordInterface
                 $this->setPrice($value);
                 break;
             case 4:
-                $this->setCustomerName($value);
+                $this->setChargeId($value);
                 break;
             case 5:
-                $this->setCustomerEmail($value);
+                $this->setCustomerId($value);
                 break;
             case 6:
-                $this->setCustomerPhoneNumber($value);
+                $this->setCustomerName($value);
                 break;
             case 7:
-                $this->setOpen($value);
+                $this->setCustomerEmail($value);
                 break;
             case 8:
-                $this->setCreatedAt($value);
+                $this->setCustomerPhoneNumber($value);
                 break;
             case 9:
+                $this->setOpen($value);
+                break;
+            case 10:
+                $this->setCreatedAt($value);
+                break;
+            case 11:
                 $this->setUpdatedAt($value);
                 break;
         } // switch()
@@ -1351,22 +1455,28 @@ abstract class Order implements ActiveRecordInterface
             $this->setPrice($arr[$keys[3]]);
         }
         if (array_key_exists($keys[4], $arr)) {
-            $this->setCustomerName($arr[$keys[4]]);
+            $this->setChargeId($arr[$keys[4]]);
         }
         if (array_key_exists($keys[5], $arr)) {
-            $this->setCustomerEmail($arr[$keys[5]]);
+            $this->setCustomerId($arr[$keys[5]]);
         }
         if (array_key_exists($keys[6], $arr)) {
-            $this->setCustomerPhoneNumber($arr[$keys[6]]);
+            $this->setCustomerName($arr[$keys[6]]);
         }
         if (array_key_exists($keys[7], $arr)) {
-            $this->setOpen($arr[$keys[7]]);
+            $this->setCustomerEmail($arr[$keys[7]]);
         }
         if (array_key_exists($keys[8], $arr)) {
-            $this->setCreatedAt($arr[$keys[8]]);
+            $this->setCustomerPhoneNumber($arr[$keys[8]]);
         }
         if (array_key_exists($keys[9], $arr)) {
-            $this->setUpdatedAt($arr[$keys[9]]);
+            $this->setOpen($arr[$keys[9]]);
+        }
+        if (array_key_exists($keys[10], $arr)) {
+            $this->setCreatedAt($arr[$keys[10]]);
+        }
+        if (array_key_exists($keys[11], $arr)) {
+            $this->setUpdatedAt($arr[$keys[11]]);
         }
     }
 
@@ -1420,6 +1530,12 @@ abstract class Order implements ActiveRecordInterface
         }
         if ($this->isColumnModified(OrderTableMap::COL_PRICE)) {
             $criteria->add(OrderTableMap::COL_PRICE, $this->price);
+        }
+        if ($this->isColumnModified(OrderTableMap::COL_CHARGE_ID)) {
+            $criteria->add(OrderTableMap::COL_CHARGE_ID, $this->charge_id);
+        }
+        if ($this->isColumnModified(OrderTableMap::COL_CUSTOMER_ID)) {
+            $criteria->add(OrderTableMap::COL_CUSTOMER_ID, $this->customer_id);
         }
         if ($this->isColumnModified(OrderTableMap::COL_CUSTOMER_NAME)) {
             $criteria->add(OrderTableMap::COL_CUSTOMER_NAME, $this->customer_name);
@@ -1528,6 +1644,8 @@ abstract class Order implements ActiveRecordInterface
         $copyObj->setTruckId($this->getTruckId());
         $copyObj->setItemName($this->getItemName());
         $copyObj->setPrice($this->getPrice());
+        $copyObj->setChargeId($this->getChargeId());
+        $copyObj->setCustomerId($this->getCustomerId());
         $copyObj->setCustomerName($this->getCustomerName());
         $copyObj->setCustomerEmail($this->getCustomerEmail());
         $copyObj->setCustomerPhoneNumber($this->getCustomerPhoneNumber());
@@ -1627,6 +1745,8 @@ abstract class Order implements ActiveRecordInterface
         $this->truck_id = null;
         $this->item_name = null;
         $this->price = null;
+        $this->charge_id = null;
+        $this->customer_id = null;
         $this->customer_name = null;
         $this->customer_email = null;
         $this->customer_phone_number = null;
