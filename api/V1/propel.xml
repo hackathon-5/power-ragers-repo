@@ -7,7 +7,7 @@
                     <adapter>pgsql</adapter>
                     <classname>Propel\Runtime\Connection\ConnectionWrapper</classname>
                     <dsn>pgsql:host=52.20.248.36;dbname=orderup</dsn>
-                    <user>Tree</user>
+                    <user>tree</user>
                     <password>TreeTruckTron</password>
                 </connection>
             </connections>
