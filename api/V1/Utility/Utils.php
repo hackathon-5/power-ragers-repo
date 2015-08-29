@@ -75,7 +75,6 @@ class Utils
 		}
 		else
 		{
-			echo $child;
 			$sanatizedOutput = $child;
 		}
 		return $sanatizedOutput;
