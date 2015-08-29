@@ -13,9 +13,9 @@
   },
   "autoload" : {
     "psr-0": {
-      "Controller": "V1/",
-      "Model": "V1/Model/generated-classes/",
-      "Utility": "V1/"
+      "Controller": "controllers/",
+      "Model": "generated-classes/",
+      "Utility": "utility/"
     }
   }
 }
