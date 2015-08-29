@@ -2,12 +2,11 @@
 
 namespace Controller;
 
+use Model\AccessToken;
+use Model\AccessTokenQuery;
 use \Exception;
 use Model\UserQuery;
 use Model\User;
-use Model\AccessToken;
-use Model\FirmQuery;
-use Model\AccessTokenQuery;
 use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
