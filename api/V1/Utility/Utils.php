@@ -27,6 +27,11 @@ class Utils
 		}
 	}
 
+	public function isAssocArray($array)
+	{
+		return array_keys($array) !== range(0, count($array) - 1);
+	}
+
 	public function listObjectIDs($objects)
 	{
 		return $this->listParameterValues('Id', $objects);
@@ -48,9 +53,9 @@ class Utils
 		return $parameters;
 	}
 
-	public function serializePropelChildObjects($child)
+	protected function serializePropelChildObjects($child)
 	{
-		if(is_array($child))
+		if(is_array($child) && $this->isAssocArray($child))
 		{
 			$sanatizedOutput = array();
 			foreach($output as $key => $value)
@@ -60,6 +65,7 @@ class Utils
 		}
 		else
 		{
+			echo $child;
 			$sanatizedOutput = $child;
 		}
 		return $sanatizedOutput;
