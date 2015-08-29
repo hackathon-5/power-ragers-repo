@@ -92,7 +92,7 @@ class OrderController {
 		$order->setPrice($input['price']);
 		$order->setCustomerName($input['customerName']);
 		$order->setCustomerEmail($input['customerEmail']);
-		if(array_key_exists('customerPhoneNumber', $order))
+		if(array_key_exists('customerPhoneNumber', $input))
 		{
 			$order->setCustomerPhoneNumber($input['customerPhoneNumber']);
 		}
