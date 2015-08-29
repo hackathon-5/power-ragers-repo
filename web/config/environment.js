@@ -12,11 +12,24 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
-
+    contentSecurityPolicy: {
+      'default-src': "'none'",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' api.tiles.mapbox.com api.mapbox.com",
+      'font-src': "'self' fonts.gstatic.com",
+      'frame-src': "*",
+      'connect-src': "'self' a.tiles.mapbox.com",
+      'img-src': "'self' data: a.tiles.mapbox.com",
+      'style-src': "'self' 'unsafe-inline' fonts.googleapis.com api.mapbox.com api.tiles.mapbox.com",
+    },
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
     }
+  };
+  
+  ENV['mapbox'] = {
+	  accessToken: 'pk.eyJ1IjoicmFuZHJldyIsImEiOiJiZTQwN2UwMDQ3MzM2ZDhkYmQ2NjRhMzA0MDI4N2I2MSJ9.RLUoHJAZl_AUfCfD7L2OKA',
+	  mapId: 'randrew.b5abb45b'
   };
 
   if (environment === 'development') {
