@@ -2,7 +2,7 @@
 
 namespace Controller;
 
-use Controller\StripeController;
+//use Controller\StripeController;
 use \Exception;
 use Model\Order;
 use Model\OrderQuery;

@@ -1,5 +1,7 @@
 <?php
 
+namespace Controller;
+
 use \Silex\Application;
 
 // Include stripe
