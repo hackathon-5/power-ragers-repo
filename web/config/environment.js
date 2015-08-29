@@ -12,10 +12,6 @@ module.exports = function(environment) {
         // e.g. 'with-controller': true
       }
     },
-	mapbox: {
-		accessToken: 'pk.eyJ1IjoicmFuZHJldyIsImEiOiJiZTQwN2UwMDQ3MzM2ZDhkYmQ2NjRhMzA0MDI4N2I2MSJ9.RLUoHJAZl_AUfCfD7L2OKA',
-		mapId: 'randrew.b5abb45b'
-	},
     contentSecurityPolicy: {
       'default-src': "'none'",
       'script-src': "'self' 'unsafe-inline' 'unsafe-eval' api.tiles.mapbox.com api.mapbox.com",
@@ -29,6 +25,11 @@ module.exports = function(environment) {
       // Here you can pass flags/options to your application instance
       // when it is created
     }
+  };
+  
+  ENV['mapbox'] = {
+	  accessToken: 'pk.eyJ1IjoicmFuZHJldyIsImEiOiJiZTQwN2UwMDQ3MzM2ZDhkYmQ2NjRhMzA0MDI4N2I2MSJ9.RLUoHJAZl_AUfCfD7L2OKA',
+	  mapId: 'randrew.b5abb45b'
   };
 
   if (environment === 'development') {

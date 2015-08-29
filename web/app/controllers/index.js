@@ -17,5 +17,7 @@ export default Ember.Controller.extend({
 			description: "7 cheeses. Enough said.",
 			price: 6.00
 		}
-	]
+	],
+	
+	center: [38.909671288923, -77.034084142948]
 });
