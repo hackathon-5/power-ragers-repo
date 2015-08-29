@@ -22,7 +22,7 @@ class OrderController {
 		$this->app = $app;
 		$this->request = $request;
 
-		$this->request_body = json_decode($request->getContent());
+		$this->request_body = json_decode($request->getContent(), true);
 	}
 
 	public function deleteOrder($id)
