@@ -36,6 +36,7 @@ class OrderController {
 
 		// And delete it
 		$order->delete();
+		return "Order, $id, deleted successfully.";
 	}
 
 	public function placeOrder()
@@ -48,9 +49,10 @@ class OrderController {
 		$input = $this->request_body['order'];
 		$requiredKeys = array(
 			'customer_name',
-			'customer_phone_number',
+			'customer_email',
 			'item_name',
-			'price'
+			'price',
+			'token'
 		);
 		$this->app['utils']->verifyInputIsntNull($input, $requiredKeys);
 
@@ -61,12 +63,46 @@ class OrderController {
 		$order->setPrice($input['price']);
 		$order->setCustomerName($input['customer_name']);
 		$order->setCustomerEmail($input['customer_email']);
-		$order->setCustomerPhoneNumber($input['customer_phone_number']);
+		if(array_key_exists('customer_phone_number', $order))
+		{
+			$order->setCustomerPhoneNumber($input['customer_phone_number']);
+		}
+
+		// Pay for order
+		$payment = $this->payForOrder($input);
+		// Add order info to order
+		$order->setChargeId($payment['charge_id']);
+		$order->setCustomerId($payment['customer_id']);
 		// Save the Order to the db
 		$order->save();
 
 		// Return Order objet
 		return array('order' => $order->toArray());
+	}
+
+	protected function payForOrder($order)
+	{
+		// Setup Stripe
+		\Stripe\Stripe::setApiKey($this->app['stripe_keys']['secret_key']);
+
+		// Create a new customer
+		$customer = \Stripe\Customer::create(array(
+			'email' => $order['customer_email'],
+			'card'  => $order['token']
+		));
+
+		// Pay for order
+		$charge = \Stripe\Charge::create(array(
+			'customer' => $customer->id,
+			'amount'   => $order['price']*100,
+			'currency' => 'usd'
+		));
+
+		// Return charge object
+		return array(
+			'charge_id' => $charge->id,
+			'customer_id' => $customer->id
+		);
 	}
 
 	public function updateOrder($id)
@@ -99,7 +135,7 @@ class OrderController {
 				$customer_name = $order->getCustomerName();
 				$item_name = $order->getItemName();
 
-				$message = $client->account->messages->create(array(
+				$message = $this->app['twilio']->account->messages->create(array(
 					"From" => "8433528360",
 					"To" => $customer_phone_number,
 					"Body" => "Hey $customer_name, your $item_name is ready!",
@@ -108,7 +144,7 @@ class OrderController {
 		}
 		if(array_key_exists('customer_phone_number', $input))
 		{
-			$order->setCustomerPhoneNumber($input->customer_phone_number);
+			$order->setCustomerPhoneNumber($input['customer_phone_number']);
 		}
 		$order->save();
 
