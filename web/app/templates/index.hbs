@@ -7,29 +7,22 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
-		<div class="banner-bg"></div>
-		<div class="banner-front">
-			<div class="small-12 columns">
-				<a>At 123 Main Street right now</a>
-			</div>
+	<div class="row location-bg">
+		<div class="small-12 columns">
+			<p>At 123 Main Street right now</p>
 		</div>
-		<div class="banner-point"></div>
 	</div>
 </section>
 <section>
 	<iframe width='100%' height='150px' zoom=12 frameBorder='0' src='https://a.tiles.mapbox.com/v4/randrew.b5abb45b/attribution.html?access_token=pk.eyJ1IjoicmFuZHJldyIsImEiOiJiZTQwN2UwMDQ3MzM2ZDhkYmQ2NjRhMzA0MDI4N2I2MSJ9.RLUoHJAZl_AUfCfD7L2OKA#12/32.911/-79.86'></iframe>
+	<div class="divider-yellow"></div>
 </section>
 
-<section>
+<section class="dark-bg">
 	<div class="row">
-		<div class="banner-bg-red"></div>
-		<div class="banner-front-red">
-			<div class="small-12 columns">
-				<h3>The Food</h3>
-			</div>
+		<div class="small-12 columns padding-top">
+			<h3>The Food</h3>
 		</div>
-		<div class="banner-point-red"></div>
 	</div>
 	<div class="row">
 		<div class="small-12 columns">
@@ -40,8 +33,10 @@
 					<p>{{item.description}}</p>
 				</div>
 				<div class="small-4 large-2 columns">
-					<p class="price">${{item.price}}</p>
-					<button class="button small radius pull-right">Order</button>
+					<button class="button small radius pull-right text-center margin-top">
+						<p class="price">${{item.price}}</p>
+						Order
+					</button>
 				</div>
 			</div>
 			{{/each}}
