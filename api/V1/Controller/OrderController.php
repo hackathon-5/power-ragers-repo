@@ -48,9 +48,9 @@ class OrderController {
 		}
 		$input = $this->request_body['order'];
 		$requiredKeys = array(
-			'customer_name',
-			'customer_email',
-			'item_name',
+			'customerName',
+			'customerEmail',
+			'itemName',
 			'price',
 			'token'
 		);
@@ -59,20 +59,20 @@ class OrderController {
 		// Create new Order object
 		$order = new Order();
 		$order->setTruckId($truckId = 1);
-		$order->setItemName($input['item_name']);
+		$order->setItemName($input['itemName']);
 		$order->setPrice($input['price']);
-		$order->setCustomerName($input['customer_name']);
-		$order->setCustomerEmail($input['customer_email']);
-		if(array_key_exists('customer_phone_number', $order))
+		$order->setCustomerName($input['customerName']);
+		$order->setCustomerEmail($input['customerEmail']);
+		if(array_key_exists('customerPhoneNumber', $order))
 		{
-			$order->setCustomerPhoneNumber($input['customer_phone_number']);
+			$order->setCustomerPhoneNumber($input['customerPhoneNumber']);
 		}
 
 		// Pay for order
 		$payment = $this->payForOrder($input);
 		// Add order info to order
-		$order->setChargeId($payment['charge_id']);
-		$order->setCustomerId($payment['customer_id']);
+		$order->setChargeId($payment['chargeId']);
+		$order->setCustomerId($payment['customerId']);
 		// Save the Order to the db
 		$order->save();
 
@@ -87,7 +87,7 @@ class OrderController {
 
 		// Create a new customer
 		$customer = \Stripe\Customer::create(array(
-			'email' => $order['customer_email'],
+			'email' => $order['customerEmail'],
 			'card'  => $order['token']
 		));
 
@@ -100,8 +100,8 @@ class OrderController {
 
 		// Return charge object
 		return array(
-			'charge_id' => $charge->id,
-			'customer_id' => $customer->id
+			'chargeId' => $charge->id,
+			'customerId' => $customer->id
 		);
 	}
 
@@ -142,9 +142,9 @@ class OrderController {
 				));
 			}
 		}
-		if(array_key_exists('customer_phone_number', $input))
+		if(array_key_exists('customerPhoneNumber', $input))
 		{
-			$order->setCustomerPhoneNumber($input['customer_phone_number']);
+			$order->setCustomerPhoneNumber($input['customerPhoneNumber']);
 		}
 		$order->save();
 
