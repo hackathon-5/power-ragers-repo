@@ -48,12 +48,22 @@ class Utils
 		return $parameters;
 	}
 
-	public function serializePropelOutput($output)
+	public function serializePropelChildObjects()
 	{
 		$sanatizedOutput = array();
 		foreach($output as $key => $value)
 		{
 			$sanatizedOutput[lcfirst($key)] = $this->serializePropelOutput($value);
+		}
+		return $sanatizedOutput;
+	}
+
+	public function serializePropelOutput($output)
+	{
+		$sanatizedOutput = array();
+		foreach($output as $key => $value)
+		{
+			$sanatizedOutput[lcfirst($key)] = $this->serializePropelChildObjects($value);
 		}
 		$response = new JsonResponse($sanatizedOutput);
 		$response->send();
