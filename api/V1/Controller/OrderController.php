@@ -43,7 +43,7 @@ class OrderController {
 		// Make sure request is well formated
 		if(!array_key_exists('order', $this->request_body))
 		{
-			throw new Exception("")
+			throw new Exception('Missing or malformed request.', 422);
 		}
 		$input = $this->request_body['order'];
 		$requiredKeys = array(
@@ -73,7 +73,7 @@ class OrderController {
 		// Make sure request is well formated
 		if(!array_key_exists('order', $this->request_body))
 		{
-			throw new Exception("")
+			throw new Exception('Missing or malformed request.', 422);
 		}
 		$input = $this->request_body['order'];
 		$requiredKeys = array(
