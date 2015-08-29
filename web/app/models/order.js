@@ -9,7 +9,7 @@ export default DS.Model.extend({
 	
 	customerEmail: DS.attr('string'),
 	
-	phoneNumber: DS.attr('string'),
+	customerPhoneNumber: DS.attr('string'),
 	
 	open: DS.attr('boolean'),
 	

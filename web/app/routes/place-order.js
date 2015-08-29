@@ -16,7 +16,7 @@ export default Ember.Route.extend({
 				      customerEmail: token.email,
 				      itemName: 'Mac & Cheese',
 				      price: 6,
-				      phoneNumber: route.controller.phoneNumber,
+				      customerPhoneNumber: route.controller.phoneNumber,
 				      token: token.id
 			      });
 			      
