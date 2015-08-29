@@ -1,0 +1,27 @@
+// Typography
+// This file holds all of the typography
+
+//Import fonts from Google
+@import url('http://fonts.googleapis.com/css?family=Oswald:300,400,700');
+@import url('https://fonts.googleapis.com/css?family=Lato:400,700,700italic,400italic');
+
+
+html {
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	color: #3c47ce;
+}
+
+h1,h2,h3,h4,h4,h6 {
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+p {
+	font-style: italic;
+	color: $dark-grey;
+}
+
+a {
+	font-weight: 700;
+}
