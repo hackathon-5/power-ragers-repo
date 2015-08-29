@@ -53,8 +53,7 @@ class Utils
 		$sanatizedOutput = array();
 		foreach($output as $key => $value)
 		{
-			$sanatizedOutput[lcfirst($key)] = $value;
-
+			$sanatizedOutput[lcfirst($key)] = $this->serializePropelOutput($value);
 		}
 		$response = new JsonResponse($sanatizedOutput);
 		$response->send();
