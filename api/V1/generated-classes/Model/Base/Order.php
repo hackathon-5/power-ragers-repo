@@ -108,6 +108,7 @@ abstract class Order implements ActiveRecordInterface
 
     /**
      * The value for the open field.
+     * Note: this column has a database default value of: (expression) 't'::boolean
      * @var        boolean
      */
     protected $open;
@@ -138,10 +139,22 @@ abstract class Order implements ActiveRecordInterface
     protected $alreadyInSave = false;
 
     /**
+     * Applies default values to this object.
+     * This method should be called from the object's constructor (or
+     * equivalent initialization method).
+     * @see __construct()
+     */
+    public function applyDefaultValues()
+    {
+    }
+
+    /**
      * Initializes internal state of Model\Base\Order object.
+     * @see applyDefaults()
      */
     public function __construct()
     {
+        $this->applyDefaultValues();
     }
 
     /**
@@ -1622,6 +1635,7 @@ abstract class Order implements ActiveRecordInterface
         $this->updated_at = null;
         $this->alreadyInSave = false;
         $this->clearAllReferences();
+        $this->applyDefaultValues();
         $this->resetModified();
         $this->setNew(true);
         $this->setDeleted(false);

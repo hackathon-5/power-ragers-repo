@@ -179,7 +179,7 @@ class OrderTableMap extends TableMap
         $this->addColumn('customer_name', 'CustomerName', 'VARCHAR', true, 255, null);
         $this->addColumn('customer_email', 'CustomerEmail', 'VARCHAR', true, 255, null);
         $this->addColumn('customer_phone_number', 'CustomerPhoneNumber', 'BIGINT', true, null, null);
-        $this->addColumn('open', 'Open', 'BOOLEAN', false, 255, null);
+        $this->addColumn('open', 'Open', 'BOOLEAN', false, 255, '\'t\'::boolean');
         $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('updated_at', 'UpdatedAt', 'TIMESTAMP', false, null, null);
     } // initialize()

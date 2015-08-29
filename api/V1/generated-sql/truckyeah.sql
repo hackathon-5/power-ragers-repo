@@ -63,7 +63,7 @@ CREATE TABLE "orders"
     "customer_name" VARCHAR(255) NOT NULL,
     "customer_email" VARCHAR(255) NOT NULL,
     "customer_phone_number" INT8 NOT NULL,
-    "open" BOOLEAN(255),
+    "open" BOOLEAN DEFAULT 't'::boolean,
     "created_at" TIMESTAMP,
     "updated_at" TIMESTAMP,
     PRIMARY KEY ("id")
