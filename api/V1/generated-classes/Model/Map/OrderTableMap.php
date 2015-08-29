@@ -59,7 +59,7 @@ class OrderTableMap extends TableMap
     /**
      * The total number of columns
      */
-    const NUM_COLUMNS = 10;
+    const NUM_COLUMNS = 12;
 
     /**
      * The number of lazy-loaded columns
@@ -69,7 +69,7 @@ class OrderTableMap extends TableMap
     /**
      * The number of columns to hydrate (NUM_COLUMNS - NUM_LAZY_LOAD_COLUMNS)
      */
-    const NUM_HYDRATE_COLUMNS = 10;
+    const NUM_HYDRATE_COLUMNS = 12;
 
     /**
      * the column name for the id field
@@ -90,6 +90,16 @@ class OrderTableMap extends TableMap
      * the column name for the price field
      */
     const COL_PRICE = 'orders.price';
+
+    /**
+     * the column name for the charge_id field
+     */
+    const COL_CHARGE_ID = 'orders.charge_id';
+
+    /**
+     * the column name for the customer_id field
+     */
+    const COL_CUSTOMER_ID = 'orders.customer_id';
 
     /**
      * the column name for the customer_name field
@@ -133,11 +143,11 @@ class OrderTableMap extends TableMap
      * e.g. self::$fieldNames[self::TYPE_PHPNAME][0] = 'Id'
      */
     protected static $fieldNames = array (
-        self::TYPE_PHPNAME       => array('Id', 'TruckId', 'ItemName', 'Price', 'CustomerName', 'CustomerEmail', 'CustomerPhoneNumber', 'Open', 'CreatedAt', 'UpdatedAt', ),
-        self::TYPE_CAMELNAME     => array('id', 'truckId', 'itemName', 'price', 'customerName', 'customerEmail', 'customerPhoneNumber', 'open', 'createdAt', 'updatedAt', ),
-        self::TYPE_COLNAME       => array(OrderTableMap::COL_ID, OrderTableMap::COL_TRUCK_ID, OrderTableMap::COL_ITEM_NAME, OrderTableMap::COL_PRICE, OrderTableMap::COL_CUSTOMER_NAME, OrderTableMap::COL_CUSTOMER_EMAIL, OrderTableMap::COL_CUSTOMER_PHONE_NUMBER, OrderTableMap::COL_OPEN, OrderTableMap::COL_CREATED_AT, OrderTableMap::COL_UPDATED_AT, ),
-        self::TYPE_FIELDNAME     => array('id', 'truck_id', 'item_name', 'price', 'customer_name', 'customer_email', 'customer_phone_number', 'open', 'created_at', 'updated_at', ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+        self::TYPE_PHPNAME       => array('Id', 'TruckId', 'ItemName', 'Price', 'ChargeId', 'CustomerId', 'CustomerName', 'CustomerEmail', 'CustomerPhoneNumber', 'Open', 'CreatedAt', 'UpdatedAt', ),
+        self::TYPE_CAMELNAME     => array('id', 'truckId', 'itemName', 'price', 'chargeId', 'customerId', 'customerName', 'customerEmail', 'customerPhoneNumber', 'open', 'createdAt', 'updatedAt', ),
+        self::TYPE_COLNAME       => array(OrderTableMap::COL_ID, OrderTableMap::COL_TRUCK_ID, OrderTableMap::COL_ITEM_NAME, OrderTableMap::COL_PRICE, OrderTableMap::COL_CHARGE_ID, OrderTableMap::COL_CUSTOMER_ID, OrderTableMap::COL_CUSTOMER_NAME, OrderTableMap::COL_CUSTOMER_EMAIL, OrderTableMap::COL_CUSTOMER_PHONE_NUMBER, OrderTableMap::COL_OPEN, OrderTableMap::COL_CREATED_AT, OrderTableMap::COL_UPDATED_AT, ),
+        self::TYPE_FIELDNAME     => array('id', 'truck_id', 'item_name', 'price', 'charge_id', 'customer_id', 'customer_name', 'customer_email', 'customer_phone_number', 'open', 'created_at', 'updated_at', ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
     );
 
     /**
@@ -147,11 +157,11 @@ class OrderTableMap extends TableMap
      * e.g. self::$fieldKeys[self::TYPE_PHPNAME]['Id'] = 0
      */
     protected static $fieldKeys = array (
-        self::TYPE_PHPNAME       => array('Id' => 0, 'TruckId' => 1, 'ItemName' => 2, 'Price' => 3, 'CustomerName' => 4, 'CustomerEmail' => 5, 'CustomerPhoneNumber' => 6, 'Open' => 7, 'CreatedAt' => 8, 'UpdatedAt' => 9, ),
-        self::TYPE_CAMELNAME     => array('id' => 0, 'truckId' => 1, 'itemName' => 2, 'price' => 3, 'customerName' => 4, 'customerEmail' => 5, 'customerPhoneNumber' => 6, 'open' => 7, 'createdAt' => 8, 'updatedAt' => 9, ),
-        self::TYPE_COLNAME       => array(OrderTableMap::COL_ID => 0, OrderTableMap::COL_TRUCK_ID => 1, OrderTableMap::COL_ITEM_NAME => 2, OrderTableMap::COL_PRICE => 3, OrderTableMap::COL_CUSTOMER_NAME => 4, OrderTableMap::COL_CUSTOMER_EMAIL => 5, OrderTableMap::COL_CUSTOMER_PHONE_NUMBER => 6, OrderTableMap::COL_OPEN => 7, OrderTableMap::COL_CREATED_AT => 8, OrderTableMap::COL_UPDATED_AT => 9, ),
-        self::TYPE_FIELDNAME     => array('id' => 0, 'truck_id' => 1, 'item_name' => 2, 'price' => 3, 'customer_name' => 4, 'customer_email' => 5, 'customer_phone_number' => 6, 'open' => 7, 'created_at' => 8, 'updated_at' => 9, ),
-        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, )
+        self::TYPE_PHPNAME       => array('Id' => 0, 'TruckId' => 1, 'ItemName' => 2, 'Price' => 3, 'ChargeId' => 4, 'CustomerId' => 5, 'CustomerName' => 6, 'CustomerEmail' => 7, 'CustomerPhoneNumber' => 8, 'Open' => 9, 'CreatedAt' => 10, 'UpdatedAt' => 11, ),
+        self::TYPE_CAMELNAME     => array('id' => 0, 'truckId' => 1, 'itemName' => 2, 'price' => 3, 'chargeId' => 4, 'customerId' => 5, 'customerName' => 6, 'customerEmail' => 7, 'customerPhoneNumber' => 8, 'open' => 9, 'createdAt' => 10, 'updatedAt' => 11, ),
+        self::TYPE_COLNAME       => array(OrderTableMap::COL_ID => 0, OrderTableMap::COL_TRUCK_ID => 1, OrderTableMap::COL_ITEM_NAME => 2, OrderTableMap::COL_PRICE => 3, OrderTableMap::COL_CHARGE_ID => 4, OrderTableMap::COL_CUSTOMER_ID => 5, OrderTableMap::COL_CUSTOMER_NAME => 6, OrderTableMap::COL_CUSTOMER_EMAIL => 7, OrderTableMap::COL_CUSTOMER_PHONE_NUMBER => 8, OrderTableMap::COL_OPEN => 9, OrderTableMap::COL_CREATED_AT => 10, OrderTableMap::COL_UPDATED_AT => 11, ),
+        self::TYPE_FIELDNAME     => array('id' => 0, 'truck_id' => 1, 'item_name' => 2, 'price' => 3, 'charge_id' => 4, 'customer_id' => 5, 'customer_name' => 6, 'customer_email' => 7, 'customer_phone_number' => 8, 'open' => 9, 'created_at' => 10, 'updated_at' => 11, ),
+        self::TYPE_NUM           => array(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, )
     );
 
     /**
@@ -176,10 +186,12 @@ class OrderTableMap extends TableMap
         $this->addForeignKey('truck_id', 'TruckId', 'INTEGER', 'trucks', 'id', true, null, null);
         $this->addColumn('item_name', 'ItemName', 'VARCHAR', false, 255, null);
         $this->addColumn('price', 'Price', 'FLOAT', true, null, null);
+        $this->addColumn('charge_id', 'ChargeId', 'VARCHAR', true, 255, null);
+        $this->addColumn('customer_id', 'CustomerId', 'VARCHAR', true, 255, null);
         $this->addColumn('customer_name', 'CustomerName', 'VARCHAR', true, 255, null);
         $this->addColumn('customer_email', 'CustomerEmail', 'VARCHAR', true, 255, null);
-        $this->addColumn('customer_phone_number', 'CustomerPhoneNumber', 'BIGINT', true, null, null);
-        $this->addColumn('open', 'Open', 'BOOLEAN', false, 255, '\'t\'::boolean');
+        $this->addColumn('customer_phone_number', 'CustomerPhoneNumber', 'VARCHAR', false, 255, null);
+        $this->addColumn('open', 'Open', 'BOOLEAN', false, null, '\'t\'::boolean');
         $this->addColumn('created_at', 'CreatedAt', 'TIMESTAMP', false, null, null);
         $this->addColumn('updated_at', 'UpdatedAt', 'TIMESTAMP', false, null, null);
     } // initialize()
@@ -356,6 +368,8 @@ class OrderTableMap extends TableMap
             $criteria->addSelectColumn(OrderTableMap::COL_TRUCK_ID);
             $criteria->addSelectColumn(OrderTableMap::COL_ITEM_NAME);
             $criteria->addSelectColumn(OrderTableMap::COL_PRICE);
+            $criteria->addSelectColumn(OrderTableMap::COL_CHARGE_ID);
+            $criteria->addSelectColumn(OrderTableMap::COL_CUSTOMER_ID);
             $criteria->addSelectColumn(OrderTableMap::COL_CUSTOMER_NAME);
             $criteria->addSelectColumn(OrderTableMap::COL_CUSTOMER_EMAIL);
             $criteria->addSelectColumn(OrderTableMap::COL_CUSTOMER_PHONE_NUMBER);
@@ -367,6 +381,8 @@ class OrderTableMap extends TableMap
             $criteria->addSelectColumn($alias . '.truck_id');
             $criteria->addSelectColumn($alias . '.item_name');
             $criteria->addSelectColumn($alias . '.price');
+            $criteria->addSelectColumn($alias . '.charge_id');
+            $criteria->addSelectColumn($alias . '.customer_id');
             $criteria->addSelectColumn($alias . '.customer_name');
             $criteria->addSelectColumn($alias . '.customer_email');
             $criteria->addSelectColumn($alias . '.customer_phone_number');

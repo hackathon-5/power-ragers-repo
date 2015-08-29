@@ -60,13 +60,13 @@ class StripeController extends \Stripe
 	public function payForOrder($order)
 	{
 		// Create a new customer
-		$customer = \Stripe\Customer::create(array(
+		$customer = \Stripe_Customer::create(array(
 			'email' => $order['customerEmail'],
 			'card'  => $order['token']
 		));
 
 		// Pay for order
-		$charge = \Stripe\Charge::create(array(
+		$charge = \Stripe_Charge::create(array(
 			'customer' => $customer->id,
 			'amount'   => $order['price']*100,
 			'currency' => 'usd'

@@ -24,6 +24,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildOrderQuery orderByTruckId($order = Criteria::ASC) Order by the truck_id column
  * @method     ChildOrderQuery orderByItemName($order = Criteria::ASC) Order by the item_name column
  * @method     ChildOrderQuery orderByPrice($order = Criteria::ASC) Order by the price column
+ * @method     ChildOrderQuery orderByChargeId($order = Criteria::ASC) Order by the charge_id column
+ * @method     ChildOrderQuery orderByCustomerId($order = Criteria::ASC) Order by the customer_id column
  * @method     ChildOrderQuery orderByCustomerName($order = Criteria::ASC) Order by the customer_name column
  * @method     ChildOrderQuery orderByCustomerEmail($order = Criteria::ASC) Order by the customer_email column
  * @method     ChildOrderQuery orderByCustomerPhoneNumber($order = Criteria::ASC) Order by the customer_phone_number column
@@ -35,6 +37,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildOrderQuery groupByTruckId() Group by the truck_id column
  * @method     ChildOrderQuery groupByItemName() Group by the item_name column
  * @method     ChildOrderQuery groupByPrice() Group by the price column
+ * @method     ChildOrderQuery groupByChargeId() Group by the charge_id column
+ * @method     ChildOrderQuery groupByCustomerId() Group by the customer_id column
  * @method     ChildOrderQuery groupByCustomerName() Group by the customer_name column
  * @method     ChildOrderQuery groupByCustomerEmail() Group by the customer_email column
  * @method     ChildOrderQuery groupByCustomerPhoneNumber() Group by the customer_phone_number column
@@ -69,6 +73,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildOrder findOneByTruckId(int $truck_id) Return the first ChildOrder filtered by the truck_id column
  * @method     ChildOrder findOneByItemName(string $item_name) Return the first ChildOrder filtered by the item_name column
  * @method     ChildOrder findOneByPrice(double $price) Return the first ChildOrder filtered by the price column
+ * @method     ChildOrder findOneByChargeId(string $charge_id) Return the first ChildOrder filtered by the charge_id column
+ * @method     ChildOrder findOneByCustomerId(string $customer_id) Return the first ChildOrder filtered by the customer_id column
  * @method     ChildOrder findOneByCustomerName(string $customer_name) Return the first ChildOrder filtered by the customer_name column
  * @method     ChildOrder findOneByCustomerEmail(string $customer_email) Return the first ChildOrder filtered by the customer_email column
  * @method     ChildOrder findOneByCustomerPhoneNumber(string $customer_phone_number) Return the first ChildOrder filtered by the customer_phone_number column
@@ -83,6 +89,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildOrder requireOneByTruckId(int $truck_id) Return the first ChildOrder filtered by the truck_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildOrder requireOneByItemName(string $item_name) Return the first ChildOrder filtered by the item_name column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildOrder requireOneByPrice(double $price) Return the first ChildOrder filtered by the price column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildOrder requireOneByChargeId(string $charge_id) Return the first ChildOrder filtered by the charge_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
+ * @method     ChildOrder requireOneByCustomerId(string $customer_id) Return the first ChildOrder filtered by the customer_id column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildOrder requireOneByCustomerName(string $customer_name) Return the first ChildOrder filtered by the customer_name column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildOrder requireOneByCustomerEmail(string $customer_email) Return the first ChildOrder filtered by the customer_email column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
  * @method     ChildOrder requireOneByCustomerPhoneNumber(string $customer_phone_number) Return the first ChildOrder filtered by the customer_phone_number column and throws \Propel\Runtime\Exception\EntityNotFoundException when not found
@@ -95,6 +103,8 @@ use Propel\Runtime\Exception\PropelException;
  * @method     ChildOrder[]|ObjectCollection findByTruckId(int $truck_id) Return ChildOrder objects filtered by the truck_id column
  * @method     ChildOrder[]|ObjectCollection findByItemName(string $item_name) Return ChildOrder objects filtered by the item_name column
  * @method     ChildOrder[]|ObjectCollection findByPrice(double $price) Return ChildOrder objects filtered by the price column
+ * @method     ChildOrder[]|ObjectCollection findByChargeId(string $charge_id) Return ChildOrder objects filtered by the charge_id column
+ * @method     ChildOrder[]|ObjectCollection findByCustomerId(string $customer_id) Return ChildOrder objects filtered by the customer_id column
  * @method     ChildOrder[]|ObjectCollection findByCustomerName(string $customer_name) Return ChildOrder objects filtered by the customer_name column
  * @method     ChildOrder[]|ObjectCollection findByCustomerEmail(string $customer_email) Return ChildOrder objects filtered by the customer_email column
  * @method     ChildOrder[]|ObjectCollection findByCustomerPhoneNumber(string $customer_phone_number) Return ChildOrder objects filtered by the customer_phone_number column
@@ -193,7 +203,7 @@ abstract class OrderQuery extends ModelCriteria
      */
     protected function findPkSimple($key, ConnectionInterface $con)
     {
-        $sql = 'SELECT id, truck_id, item_name, price, customer_name, customer_email, customer_phone_number, open, created_at, updated_at FROM orders WHERE id = :p0';
+        $sql = 'SELECT id, truck_id, item_name, price, charge_id, customer_id, customer_name, customer_email, customer_phone_number, open, created_at, updated_at FROM orders WHERE id = :p0';
         try {
             $stmt = $con->prepare($sql);
             $stmt->bindValue(':p0', $key, PDO::PARAM_INT);
@@ -438,6 +448,64 @@ abstract class OrderQuery extends ModelCriteria
     }
 
     /**
+     * Filter the query on the charge_id column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByChargeId('fooValue');   // WHERE charge_id = 'fooValue'
+     * $query->filterByChargeId('%fooValue%'); // WHERE charge_id LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $chargeId The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildOrderQuery The current query, for fluid interface
+     */
+    public function filterByChargeId($chargeId = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($chargeId)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $chargeId)) {
+                $chargeId = str_replace('*', '%', $chargeId);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(OrderTableMap::COL_CHARGE_ID, $chargeId, $comparison);
+    }
+
+    /**
+     * Filter the query on the customer_id column
+     *
+     * Example usage:
+     * <code>
+     * $query->filterByCustomerId('fooValue');   // WHERE customer_id = 'fooValue'
+     * $query->filterByCustomerId('%fooValue%'); // WHERE customer_id LIKE '%fooValue%'
+     * </code>
+     *
+     * @param     string $customerId The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
+     * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
+     *
+     * @return $this|ChildOrderQuery The current query, for fluid interface
+     */
+    public function filterByCustomerId($customerId = null, $comparison = null)
+    {
+        if (null === $comparison) {
+            if (is_array($customerId)) {
+                $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $customerId)) {
+                $customerId = str_replace('*', '%', $customerId);
+                $comparison = Criteria::LIKE;
+            }
+        }
+
+        return $this->addUsingAlias(OrderTableMap::COL_CUSTOMER_ID, $customerId, $comparison);
+    }
+
+    /**
      * Filter the query on the customer_name column
      *
      * Example usage:
@@ -500,36 +568,24 @@ abstract class OrderQuery extends ModelCriteria
      *
      * Example usage:
      * <code>
-     * $query->filterByCustomerPhoneNumber(1234); // WHERE customer_phone_number = 1234
-     * $query->filterByCustomerPhoneNumber(array(12, 34)); // WHERE customer_phone_number IN (12, 34)
-     * $query->filterByCustomerPhoneNumber(array('min' => 12)); // WHERE customer_phone_number > 12
+     * $query->filterByCustomerPhoneNumber('fooValue');   // WHERE customer_phone_number = 'fooValue'
+     * $query->filterByCustomerPhoneNumber('%fooValue%'); // WHERE customer_phone_number LIKE '%fooValue%'
      * </code>
      *
-     * @param     mixed $customerPhoneNumber The value to use as filter.
-     *              Use scalar values for equality.
-     *              Use array values for in_array() equivalent.
-     *              Use associative array('min' => $minValue, 'max' => $maxValue) for intervals.
+     * @param     string $customerPhoneNumber The value to use as filter.
+     *              Accepts wildcards (* and % trigger a LIKE)
      * @param     string $comparison Operator to use for the column comparison, defaults to Criteria::EQUAL
      *
      * @return $this|ChildOrderQuery The current query, for fluid interface
      */
     public function filterByCustomerPhoneNumber($customerPhoneNumber = null, $comparison = null)
     {
-        if (is_array($customerPhoneNumber)) {
-            $useMinMax = false;
-            if (isset($customerPhoneNumber['min'])) {
-                $this->addUsingAlias(OrderTableMap::COL_CUSTOMER_PHONE_NUMBER, $customerPhoneNumber['min'], Criteria::GREATER_EQUAL);
-                $useMinMax = true;
-            }
-            if (isset($customerPhoneNumber['max'])) {
-                $this->addUsingAlias(OrderTableMap::COL_CUSTOMER_PHONE_NUMBER, $customerPhoneNumber['max'], Criteria::LESS_EQUAL);
-                $useMinMax = true;
-            }
-            if ($useMinMax) {
-                return $this;
-            }
-            if (null === $comparison) {
+        if (null === $comparison) {
+            if (is_array($customerPhoneNumber)) {
                 $comparison = Criteria::IN;
+            } elseif (preg_match('/[\%\*]/', $customerPhoneNumber)) {
+                $customerPhoneNumber = str_replace('*', '%', $customerPhoneNumber);
+                $comparison = Criteria::LIKE;
             }
         }
 
