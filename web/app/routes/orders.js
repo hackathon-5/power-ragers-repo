@@ -51,5 +51,12 @@ export default Ember.Route.extend({
 			open: false,
 			price: 5.50
 		}];	
+	},
+	
+	actions: {
+		closeOrder: function(order) {
+			order.set('open', false);
+			order.save();
+		}
 	}
 });
