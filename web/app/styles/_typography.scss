@@ -28,4 +28,14 @@ p.no-margin {
 
 a {
 	font-weight: 700;
+
+	&:hover {
+		color: $white;
+	}
+}
+
+@media screen and (max-width: 700px) {
+	html {
+		font-size: 13px;
+	}
 }

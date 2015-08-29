@@ -1,30 +1,31 @@
-<section>
+<section class="dark-bg">
 	<div class="row">
-		<div class="small-12 columns">
+		<div class="small-12 columns padding-top">
 			{{#link-to 'index'}}&lt; Back{{/link-to}}
 		</div>
 	</div>
 	<div class="row">
-		<div class="small-12 columns text-center">
-			<h2>{{format-money 6.00 symbol='$'}}</h2>
-			<p>Mac & cheese</p>
+		<div class="small-12 columns text-center padding-top">
+			<h1>$6.00</h1>
+			<h4>Mac & cheese</h4>
 		</div>
 	</div>
-	<div class="row">
-		<div class="small-12 columns">
+	<div class="row margin-top">
+		<div class="small-10 small-offset-1 columns">
 			<label>Name</label>
 			{{input placeholder="Truck Harrison" value=customerName}}
 		</div>
 	</div>
-	<div class="row">
-		<div class="small-12 columns">
+	<div class="row margin-top">
+		<div class="small-10 small-offset-1 columns">
 			<label>Phone number</label>
 			{{phone-number phone_number=phoneNumber}}
+			<p>We'll text you when you're order is ready!</p>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row margin-top">
 		<div class="small-12 columns text-center">
-			<button class="button radius" {{action 'order'}}>Place order</button>
+			<button class="button large radius" {{action 'order'}}>Place order</button>
 		</div>
 	</div>
 </section>

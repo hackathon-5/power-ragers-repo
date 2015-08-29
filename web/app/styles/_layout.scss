@@ -1,6 +1,13 @@
 // Layout
 // This file holds all of the layout elements
 
+// Nav
+img.logo {
+    width: 110px;
+}
+.top-bar .name h1 a {
+    width: 100%;
+}
 //Hero Section
 .hero {
 	background: linear-gradient(rgba(43,76,91, 0.90), rgba(43,76,91, 0.90)), url('/assets/images/choo.jpg');
@@ -48,16 +55,19 @@
 // Background
 .dark-bg {
     background: $dark-blue;
+    padding: 0 0 90px 0;
 
-    h2 {
+    h1,h2 {
         color: $white;
     }
     h3 {
         color: $grey;
     }
-
     p,h4 {
         color: $light-grey;
+    }
+    a {
+        color: $grey;
     }
 }
 
@@ -69,6 +79,10 @@
     img {
         width: 17px;
         margin-right: 10px;
+    }
+
+    button.radius, .button.radius {
+        min-height: 100px;
     }
 }
 p.price {
