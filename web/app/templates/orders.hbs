@@ -23,12 +23,12 @@
 						<div class="row menu-item">
 							<div class="small-8 columns">
 								<h2>{{order.itemName}}</h2>
-								<p class="no-margin"><img src="/assets/icons/time.png" alt="Order Time"/>{{order.createdAt}}</p>
+								<p class="no-margin"><img src="/assets/icons/time.png" alt="Order Time"/>{{moment-from-now order.createdAt}}</p>
 								<p><img src="/assets/icons/person.png" alt="Customer"/>by {{order.customerName}}</p>
 							</div>
 							<div class="small-4 columns margin-top">
 								<button class="button small radius" {{action 'closeOrder' order}}>
-									<p class="price">${{order.price}}</p>
+									<p class="price">{{format-money order.price symbol='$'}}</p>
 									Close
 								</button>
 							</div>
@@ -40,11 +40,11 @@
 						<div class="row closed-orders">
 							<div class="small-8 columns">
 								<h2>{{order.itemName}}</h2>
-								<p class="no-margin"><img src="/assets/icons/time.png" alt="Order Time"/>{{order.createdAt}}</p>
+								<p class="no-margin"><img src="/assets/icons/time.png" alt="Order Time"/>{{moment-from-now order.createdAt}}</p>
 								<p><img src="/assets/icons/person.png" alt="Customer"/>by {{order.customerName}}</p>
 							</div>
 							<div class="small-4 columns margin-top">
-								<p class="price">${{order.price}}</p>
+								<p class="price">{{format-money order.price symbol='$'}}</p>
 								<h5>Closed</h5>
 							</div>
 						</div>
