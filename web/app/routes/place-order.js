@@ -13,11 +13,24 @@ export default Ember.Route.extend({
 			      // You can access the token ID with `token.id`
 			      var order = route.store.createRecord('order', {
 				      customerName: route.controller.customerName,
-				      phoneNumber: route.controller.phoneNumber,
+				      customerEmail: token.email,
+				      itemName: 'Mac & Cheese',
+				      price: 6,
+				      customerPhoneNumber: route.controller.phoneNumber,
 				      token: token.id
 			      });
 			      
-			      order.save();
+			      order.save().then(
+			      	//success
+			      	function() {
+				      	route.notifications.addNotification({
+					        message: 'Order up!',
+					        type: 'success',
+					        autoClear: true
+					    });
+					    route.transitionTo('confirmation');
+			      	}
+			      );
 			    }
 			  });
 
