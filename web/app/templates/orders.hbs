@@ -1,46 +1,51 @@
 <section>
 	<div class="row">
-		<div class="small-12 columns">
-			<h2>Mac Daddy's Food Truck</h2>
+		<div class="hero">
+			<div class="small-12 columns">
+				<h4>Orders</h4>
+				<h1>Mac Daddy's Food Truck</h1>
+			</div>
 		</div>
 	</div>
 </section>
-
-<section>
+<div class="divider-yellow"></div>
+<ul class="tabs" data-tab>
+	<li {{bind-attr class=":tab-title openOrders:active"}} {{action 'switchTab'}}><a>{{open.length}} Open</a></li>
+	<li {{bind-attr class=":tab-title openOrders::active"}} {{action 'switchTab'}}><a>{{closed.length}} Closed</a></li>
+</ul>
+<section class="dark-bg">
 	<div class="row">
 		<div class="small-12 columns">
-			<h3>Menu</h3>
-			
-			<ul class="tabs" data-tab>
-				<li {{bind-attr class=":tab-title openOrders:active"}} {{action 'switchTab'}}><a>{{open.length}} Open</a></li>
-				<li {{bind-attr class=":tab-title openOrders::active"}} {{action 'switchTab'}}><a>{{closed.length}} Closed</a></li>
-			</ul>
 			<div class="tabs-content">
 				{{#if openOrders}}
+					<h4 class="margin-top">Open Orders</h4>
 					{{#each open as |order|}}
-						<div class="row">
+						<div class="row menu-item">
 							<div class="small-8 columns">
-								<h4>{{order.itemName}}</h4>
-								<p>{{order.createdAt}}</p>
-								<p>Customer: {{order.customerName}}</p>
+								<h2>{{order.itemName}}</h2>
+								<p class="no-margin"><img src="/assets/icons/time.png" alt="Order Time"/>{{order.createdAt}}</p>
+								<p><img src="/assets/icons/person.png" alt="Customer"/>by {{order.customerName}}</p>
 							</div>
-							<div class="small-4 columns">
-								<h4>${{order.price}}</h4>
-								<button class="button radius">Close</button>
+							<div class="small-4 columns margin-top">
+								<button class="button small radius">
+									<p class="price">${{order.price}}</p>
+									Close
+								</button>
 							</div>
 						</div>
 					{{/each}}
 				{{else}}
+					<h4 class="margin-top">Closed Orders</h4>
 					{{#each closed as |order|}}
-						<div class="row">
+						<div class="row closed-orders">
 							<div class="small-8 columns">
-								<h4>{{order.itemName}}</h4>
-								<p>{{order.createdAt}}</p>
-								<p>Customer: {{order.customerName}}</p>
+								<h2>{{order.itemName}}</h2>
+								<p class="no-margin"><img src="/assets/icons/time.png" alt="Order Time"/>{{order.createdAt}}</p>
+								<p><img src="/assets/icons/person.png" alt="Customer"/>by {{order.customerName}}</p>
 							</div>
-							<div class="small-4 columns">
-								<h4>${{order.price}}</h4>
-								<button class="button radius disabled">Closed</button>
+							<div class="small-4 columns margin-top">
+								<p class="price">${{order.price}}</p>
+								<h5>Closed</h5>
 							</div>
 						</div>
 					{{/each}}

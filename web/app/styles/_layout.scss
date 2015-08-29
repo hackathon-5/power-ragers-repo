@@ -1,0 +1,109 @@
+// Layout
+// This file holds all of the layout elements
+
+//Hero Section
+.hero {
+	background: linear-gradient(rgba(43,76,91, 0.90), rgba(43,76,91, 0.90)), url('/assets/images/choo.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+    overflow: hidden;
+    color: $white;
+    padding: 40px 0 25px;
+
+    p,h4 {
+    	color: $light-grey;
+    }
+    h1 {
+        color: $white;
+        font-family: "Oswald";
+        letter-spacing: 1px;
+    }
+}
+
+
+// Map/Location
+.location-bg {
+    height: 100%;
+    overflow: hidden;
+    padding: 10px;
+    background-color: $dark-blue;
+
+    p {
+    	color: $yellow;
+        margin-bottom: 0;
+        font-style: normal;
+        font-weight: 
+
+    }
+}
+.divider-yellow {
+    height: 12px;
+    width: 100%;
+    background-color: $yellow;
+    margin-top: -6px;
+}
+
+// Background
+.dark-bg {
+    background: $dark-blue;
+
+    h2 {
+        color: $white;
+    }
+    h3 {
+        color: $grey;
+    }
+
+    p,h4 {
+        color: $light-grey;
+    }
+}
+
+
+// Menu Items
+.menu-item {
+	padding: 30px 0 10px;
+
+    img {
+        width: 17px;
+        margin-right: 10px;
+    }
+}
+p.price {
+	font-style: normal;
+	font-size: 1.35rem;
+	font-weight: 700;
+    color: $white;
+    margin-bottom: 0;
+}
+
+
+// Orders Page
+.tabs dd, .tabs .tab-title {
+    width: 50%;
+    text-align: center;
+
+    a {
+        background-color: $darker-grey;
+        color: $grey;
+    }
+
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+.closed-orders {
+    padding: 30px 0 10px;
+
+    h5 {
+        color: $grey;
+    }
+
+    img {
+        width: 17px;
+        margin-right: 10px;
+    }
+}
