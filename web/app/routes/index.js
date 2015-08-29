@@ -8,7 +8,7 @@ export default Ember.Route.extend({
 			"description": "A food truck serving an eclectic Fusion, and New American Cuisine.",
 			"menuItems": [
 				{
-					"title": "BBQ Spring Roles",
+					"title": "BBQ Spring Rolls",
 					"description": "Slow roasted pork and apple coleslaw served with house made BBQ sauce.",
 					"price": 5.00
 				},
@@ -18,7 +18,7 @@ export default Ember.Route.extend({
 					"price": 8.00
 				},
 				{
-					"title": "Blackend Fish Tacos",
+					"title": "Blackened Fish Tacos",
 					"description": "Three corn tortillas stuffed with blackend flounder, shaved cabbage, pineapple salsa and poblano ranch.",
 					"price": 8.00
 				},
