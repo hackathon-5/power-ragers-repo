@@ -57,10 +57,10 @@ class OrderController {
 		// Create new Order object
 		$order = new Order();
 		$order->setTruckId($truckId = 1);
-		$order->setItemName($input->item_name);
-		$order->setPrice($input->price);
-		$order->setCustomerName($input->customer_name);
-		$order->setCustomerEmail($input->customer_email);
+		$order->setItemName($input['item_name']);
+		$order->setPrice($input['price']);
+		$order->setCustomerName($input['customer_name']);
+		$order->setCustomerEmail($input['customer_email']);
 		// Save the Order to the db
 		$order->save();
 
@@ -75,36 +75,41 @@ class OrderController {
 		{
 			throw new Exception('Missing or malformed request.', 422);
 		}
-		// $input = $this->request_body['order'];
-		// $requiredKeys = array(
-		// 	'open'
-		// );
-		// $this->app['utils']->verifyInputIsntNull($input, $requiredKeys);
+		$input = $this->request_body['order'];
 
-		// Update the order
+		// Get order
 		$order = OrderQuery::create()
 				->findPK($id);
 		if(null === $order)
 		{
 			throw new Exception("Order, $id, not found.", 404);
 		}
-		$order->setOpen($input->open);
-		$order->setCustomerPhoneNumber($input->customer_phone_number);
-		$order->save();
 
-		// If the order is ready, alert the customer
-		$customer_phone_number = $order->getCustomerPhoneNumber();
-		if($customer_phone_number !== null && !$input->open)
+		// Update order
+		if(array_key_exists('open', $input))
 		{
-			$customer_name = $order->getCustomerName();
-			$item_name = $order->getItemName();
+			// Update order status
+			$order->setOpen($input->open);
 
-			$message = $client->account->messages->create(array(
-				"From" => "8433528360",
-				"To" => $customer_phone_number,
-				"Body" => "Hey $customer_name, your $item_name is ready!",
-			));
+			// If the order is ready, alert the customer
+			$customer_phone_number = $order->getCustomerPhoneNumber();
+			if($customer_phone_number !== null && $input['open'] == false)
+			{
+				$customer_name = $order->getCustomerName();
+				$item_name = $order->getItemName();
+
+				$message = $client->account->messages->create(array(
+					"From" => "8433528360",
+					"To" => $customer_phone_number,
+					"Body" => "Hey $customer_name, your $item_name is ready!",
+				));
+			}
 		}
+		if(array_key_exists('customer_phone_number', $input))
+		{
+			$order->setCustomerPhoneNumber($input->customer_phone_number);
+		}
+		$order->save();
 
 		// Return Order objet
 		return array('order' => $order->toArray());
