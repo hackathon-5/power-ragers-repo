@@ -70,11 +70,9 @@ class UserController {
 		}
 
 		$token_identifier = ($this->request_body->token === null) ? $this->request->get('token') : $this->request_body->token;
-
 		$token = AccessTokenQuery::create()
 				->filterByTokenContent($token_identifier)
 				->findOne();
-
 		if(null === $token || null === $token->getUser())
 		{
 			return null;
