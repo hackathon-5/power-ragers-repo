@@ -14,7 +14,7 @@ $baseurl = '/api';
 $app->post($baseurl.'/orders', function(Request $request) use ($app) {
 		$controller = new OrderController($app, $request);
 
-		$this->app['utils']->serializePropelOutput(
+		$app['utils']->serializePropelOutput(
 			$controller->placeOrder()
 		);
 });
@@ -22,7 +22,7 @@ $app->post($baseurl.'/orders', function(Request $request) use ($app) {
 $app->get($baseurl.'/orders', function(Request $request) use ($app) {
 		$controller = new OrderController($app, $request);
 
-		$this->app['utils']->serializePropelOutput(
+		$app['utils']->serializePropelOutput(
 			$controller->getOrders()
 		);
 });
@@ -30,7 +30,7 @@ $app->get($baseurl.'/orders', function(Request $request) use ($app) {
 $app->put($baseurl.'/orders/{id}', function(Request $request, $id) use ($app) {
 		$controller = new OrderController($app, $request);
 
-		$this->app['utils']->serializePropelOutput(
+		$app['utils']->serializePropelOutput(
 			$controller->updateOrder($id)
 		);
 });
@@ -38,7 +38,7 @@ $app->put($baseurl.'/orders/{id}', function(Request $request, $id) use ($app) {
 $app->delete($baseurl.'/orders/{id}', function(Request $request, $id) use ($app) {
 		$controller = new OrderController($app, $request);
 
-		$this->app['utils']->serializePropelOutput(
+		$app['utils']->serializePropelOutput(
 			$controller->deleteOrder($id)
 		);
 });
@@ -55,7 +55,7 @@ $app->get($baseurl.'/time', function(Request $request) use ($app) {
 $app->post($baseurl.'/users', function(Request $request) use ($app) {
 		$controller = new UserController($app, $request);
 
-		$this->app['utils']->serializePropelOutput(
+		$app['utils']->serializePropelOutput(
 			$controller->registerUser()
 		);
 });
@@ -63,7 +63,7 @@ $app->post($baseurl.'/users', function(Request $request) use ($app) {
 $app->post($baseurl.'/login', function(Request $request) use ($app) {
 		$controller = new UserController($app, $request);
 
-		$this->app['utils']->serializePropelOutput(
+		$app['utils']->serializePropelOutput(
 			$controller->userLogin()
 		);
 });
