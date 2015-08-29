@@ -29,7 +29,7 @@ class Utils
 
 	public function isAssocArray($array)
 	{
-		return array_keys($array) !== range(0, count($array) - 1);
+		return (bool)count(array_filter(array_keys($array), 'is_string'));
 	}
 
 	public function listObjectIDs($objects)
