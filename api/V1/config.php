@@ -38,7 +38,7 @@ $app['twilio'] = new Services_Twilio($twilioSID, $twilioToken);
 
 // Configure utils
 $app['utils'] = $app->share(function ($app) {
-	return new Utils($app['response']);
+	return new Utils();
 });
 
 ?>
