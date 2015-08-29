@@ -37,6 +37,15 @@
 						<p class="price">${{item.price}}</p>
 						Order
 					</button>
+				<div class="row">
+					<div class="small-8 columns">
+						<h4>{{item.title}}</h4>
+						<p>{{item.description}}</p>
+					</div>
+					<div class="small-4 columns">
+						<h4>${{item.price}}</h4>
+						{{#link-to 'place-order'}}<button class="button radius">Order</button>{{/link-to}}
+					</div>
 				</div>
 			</div>
 			{{/each}}
