@@ -58,21 +58,21 @@ $app->get($baseurl.'/trucks/{id}', function(Request $request, $id) use ($app) {
 
 
 // Users
-$app->post('/users', function(Request $request) use ($app) {
+$app->post($baseurl.'/users', function(Request $request) use ($app) {
 		$controller = new UserController($app, $request);
 
 		$response = new JsonResponse($controller->registerUser());
 		$response->send();
 });
 
-$app->post('/login', function(Request $request) use ($app) {
+$app->post($baseurl.'/login', function(Request $request) use ($app) {
 		$controller = new UserController($app, $request);
 
 		$response = new JsonResponse($controller->userLogin());
 		$response->send();
 });
 
-$app->post('/auth', function(Request $request) use ($app) {
+$app->post($baseurl.'/auth', function(Request $request) use ($app) {
 		$controller = new UserController($app, $request);
 
 		$response = new JsonResponse($controller->authenticateToken());
