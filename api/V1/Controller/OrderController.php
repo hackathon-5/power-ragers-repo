@@ -83,7 +83,7 @@ class OrderController {
 	protected function payForOrder($order)
 	{
 		// Setup Stripe
-		\Stripe\Stripe::setApiKey($this->app['stripe_keys']['secret_key']);
+		\Stripe::setApiKey($this->app['stripe_keys']['secret_key']);
 
 		// Create a new customer
 		$customer = \Stripe\Customer::create(array(

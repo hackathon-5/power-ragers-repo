@@ -2,6 +2,7 @@
 
 use Controller\OrderController;
 use Controller\TruckController;
+use Controller\UserController;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,7 +40,6 @@ $app->delete($baseurl.'/orders/{id}', function(Request $request, $id) use ($app)
 		$response->send();
 });
 
-
 $app->get($baseurl.'/time', function(Request $request) use ($app) {
 		$response = new JsonResponse(array(
 			'time' => time()
@@ -57,5 +57,26 @@ $app->get($baseurl.'/trucks/{id}', function(Request $request, $id) use ($app) {
 });
 
 
+// Users
+$app->post('/user', function(Request $request) use ($app) {
+		$controller = new UserController($app, $request);
+
+		$response = new JsonResponse($controller->registerUser());
+		$response->send();
+});
+
+$app->post('/login', function(Request $request) use ($app) {
+		$controller = new UserController($app, $request);
+
+		$response = new JsonResponse($controller->userLogin());
+		$response->send();
+});
+
+$app->post('/login', function(Request $request) use ($app) {
+		$controller = new UserController($app, $request);
+
+		$response = new JsonResponse($controller->authenticateToken());
+		$response->send();
+});
 
 ?>
