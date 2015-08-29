@@ -48,6 +48,18 @@ class Utils
 		return $parameters;
 	}
 
+	public function serializePropelOutput($output)
+	{
+		$sanatizedOutput = array();
+		foreach($output as $key => $value)
+		{
+			$sanatizedOutput[lcfirst($key)] = $value;
+
+		}
+		$response = new JsonResponse($sanatizedOutput);
+		$response->send();
+	}
+
 	public function verifyInputIsntNull($params, $requiredParams)
 	{
 		if(empty($params))

@@ -14,29 +14,33 @@ $baseurl = '/api';
 $app->post($baseurl.'/orders', function(Request $request) use ($app) {
 		$controller = new OrderController($app, $request);
 
-		$response = new JsonResponse($controller->placeOrder());
-		$response->send();
+		$this->app['utils']->serializePropelOutput(
+			$controller->placeOrder()
+		);
 });
 
 $app->get($baseurl.'/orders', function(Request $request) use ($app) {
 		$controller = new OrderController($app, $request);
 
-		$response = new JsonResponse($controller->getOrders());
-		$response->send();
+		$this->app['utils']->serializePropelOutput(
+			$controller->getOrders()
+		);
 });
 
 $app->put($baseurl.'/orders/{id}', function(Request $request, $id) use ($app) {
 		$controller = new OrderController($app, $request);
 
-		$response = new JsonResponse($controller->updateOrder($id));
-		$response->send();
+		$this->app['utils']->serializePropelOutput(
+			$controller->updateOrder($id)
+		);
 });
 
 $app->delete($baseurl.'/orders/{id}', function(Request $request, $id) use ($app) {
 		$controller = new OrderController($app, $request);
 
-		$response = new JsonResponse($controller->deleteOrder($id));
-		$response->send();
+		$this->app['utils']->serializePropelOutput(
+			$controller->deleteOrder($id)
+		);
 });
 
 $app->get($baseurl.'/time', function(Request $request) use ($app) {
@@ -51,15 +55,17 @@ $app->get($baseurl.'/time', function(Request $request) use ($app) {
 $app->post($baseurl.'/users', function(Request $request) use ($app) {
 		$controller = new UserController($app, $request);
 
-		$response = new JsonResponse($controller->registerUser());
-		$response->send();
+		$this->app['utils']->serializePropelOutput(
+			$controller->registerUser()
+		);
 });
 
 $app->post($baseurl.'/login', function(Request $request) use ($app) {
 		$controller = new UserController($app, $request);
 
-		$response = new JsonResponse($controller->userLogin());
-		$response->send();
+		$this->app['utils']->serializePropelOutput(
+			$controller->userLogin()
+		);
 });
 
 $app->post($baseurl.'/auth', function(Request $request) use ($app) {
