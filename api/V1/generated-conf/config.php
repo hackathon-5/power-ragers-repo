@@ -5,7 +5,7 @@ $serviceContainer->setAdapterClass('truckyeah', 'pgsql');
 $manager = new \Propel\Runtime\Connection\ConnectionManagerSingle();
 $manager->setConfiguration(array (
   'classname' => 'Propel\\Runtime\\Connection\\ConnectionWrapper',
-  'dsn' => 'pgsql:host=127.0.0.1/32;dbname=orderup',
+  'dsn' => 'pgsql:host=localhost;dbname=orderup',
   'user' => 'tree',
   'password' => 'TreeTruckTron',
 ));

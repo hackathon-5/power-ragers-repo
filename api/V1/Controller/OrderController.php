@@ -2,6 +2,7 @@
 
 namespace Controller;
 
+//use Controller\StripeController;
 use \Exception;
 use Model\Order;
 use Model\OrderQuery;
@@ -14,6 +15,7 @@ class OrderController {
 	protected $app;
 	protected $request;
 	protected $request_body;
+	protected $stripeWrapper;
 
 	public function __construct($app, $request)
 	{
@@ -21,6 +23,7 @@ class OrderController {
 
 		$this->app = $app;
 		$this->request = $request;
+		$this->stripeWrapper = new StripeController($app, $this->app['stripe_keys']['secret_key']);
 
 		$this->request_body = json_decode($request->getContent(), true);
 	}
@@ -37,6 +40,32 @@ class OrderController {
 		// And delete it
 		$order->delete();
 		return "Order, $id, deleted successfully.";
+	}
+
+
+	public function getOrders()
+	{
+		// Get truck id
+		if(null === $this->request->get('truckId'))
+		{
+			throw new Exception('Oops, looks like you forgot a truckId :)', 422);
+		}
+		$truckId = $this->request->get('truckId');
+
+		// Get orders for that truck
+		$orders = OrderQuery::create()
+				->filterByTruckId($truckId)
+				->find()
+				->toArray();
+
+		if(null === $orders)
+		{
+			throw new Exception("No orders found for truck $id.", 404);
+		}
+
+		return array(
+			'orders' => $orders
+		);
 	}
 
 	public function placeOrder()
@@ -63,13 +92,13 @@ class OrderController {
 		$order->setPrice($input['price']);
 		$order->setCustomerName($input['customerName']);
 		$order->setCustomerEmail($input['customerEmail']);
-		if(array_key_exists('customerPhoneNumber', $order))
+		if(array_key_exists('customerPhoneNumber', $input))
 		{
 			$order->setCustomerPhoneNumber($input['customerPhoneNumber']);
 		}
 
 		// Pay for order
-		$payment = $this->payForOrder($input);
+		$payment = $this->stripeWrapper->payForOrder($input);
 		// Add order info to order
 		$order->setChargeId($payment['chargeId']);
 		$order->setCustomerId($payment['customerId']);
@@ -78,31 +107,6 @@ class OrderController {
 
 		// Return Order objet
 		return array('order' => $order->toArray());
-	}
-
-	protected function payForOrder($order)
-	{
-		// Setup Stripe
-		\Stripe\Stripe::setApiKey($this->app['stripe_keys']['secret_key']);
-
-		// Create a new customer
-		$customer = \Stripe\Customer::create(array(
-			'email' => $order['customerEmail'],
-			'card'  => $order['token']
-		));
-
-		// Pay for order
-		$charge = \Stripe\Charge::create(array(
-			'customer' => $customer->id,
-			'amount'   => $order['price']*100,
-			'currency' => 'usd'
-		));
-
-		// Return charge object
-		return array(
-			'chargeId' => $charge->id,
-			'customerId' => $customer->id
-		);
 	}
 
 	public function updateOrder($id)

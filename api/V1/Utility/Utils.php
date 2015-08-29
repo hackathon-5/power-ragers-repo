@@ -27,6 +27,11 @@ class Utils
 		}
 	}
 
+	public function isAssocArray($array)
+	{
+		return (bool)count(array_filter(array_keys($array), 'is_string'));
+	}
+
 	public function listObjectIDs($objects)
 	{
 		return $this->listParameterValues('Id', $objects);
@@ -46,6 +51,44 @@ class Utils
 
 		// Return parameters
 		return $parameters;
+	}
+
+	protected function serializePropelChildObjects($child)
+	{
+		if(is_array($child))
+		{
+			$sanatizedOutput = array();
+			if($this->isAssocArray($child))
+			{
+				foreach($child as $key => $value)
+				{
+					$sanatizedOutput[lcfirst($key)] = $this->serializePropelChildObjects($value);
+				}
+			}
+			else
+			{
+				foreach($child as $key => $value)
+				{
+					$sanatizedOutput[$key] = $this->serializePropelChildObjects($value);
+				}
+			}
+		}
+		else
+		{
+			$sanatizedOutput = $child;
+		}
+		return $sanatizedOutput;
+	}
+
+	public function serializePropelOutput($output)
+	{
+		$sanatizedOutput = array();
+		foreach($output as $key => $value)
+		{
+			$sanatizedOutput[lcfirst($key)] = $this->serializePropelChildObjects($value);
+		}
+		$response = new JsonResponse($sanatizedOutput);
+		$response->send();
 	}
 
 	public function verifyInputIsntNull($params, $requiredParams)
