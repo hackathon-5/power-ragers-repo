@@ -1,0 +1,25 @@
+<section>
+	<div class="row">
+		<div class="small-12 columns">
+			<h2>$6.00</h2>
+			<p>Mac & cheese</p>
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<label>Name</label>
+			{{input placeholder="Truck Harrison" value=customerName}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns">
+			<label>Phone number</label>
+			{{phone-number phone_number=phoneNumber}}
+		</div>
+	</div>
+	<div class="row">
+		<div class="small-12 columns text-center">
+			<button class="button radius" {{action 'order'}}>Place order</button>
+		</div>
+	</div>
+</section>
