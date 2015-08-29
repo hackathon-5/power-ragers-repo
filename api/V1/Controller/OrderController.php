@@ -61,6 +61,7 @@ class OrderController {
 		$order->setPrice($input['price']);
 		$order->setCustomerName($input['customer_name']);
 		$order->setCustomerEmail($input['customer_email']);
+		$order->setCustomerPhoneNumber($input['customer_phone_number']);
 		// Save the Order to the db
 		$order->save();
 
