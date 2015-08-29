@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<database name="orderup" defaultIdMethod="native" namespace="Model">
+<database name="truckyeah" defaultIdMethod="native" namespace="Model">
 
   <table name="users" phpName="User">
     <column name="id" type="integer" required="true" primaryKey="true" autoIncrement="true"/>
