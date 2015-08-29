@@ -65,6 +65,11 @@
 // Menu Items
 .menu-item {
 	padding: 30px 0 10px;
+
+    img {
+        width: 17px;
+        margin-right: 10px;
+    }
 }
 p.price {
 	font-style: normal;
@@ -91,9 +96,14 @@ p.price {
 }
 
 .closed-orders {
-    padding: 30px 0 20px;
+    padding: 30px 0 10px;
 
     h5 {
         color: $grey;
+    }
+
+    img {
+        width: 17px;
+        margin-right: 10px;
     }
 }
