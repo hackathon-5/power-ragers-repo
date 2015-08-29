@@ -14,11 +14,11 @@ module.exports = function(environment) {
     },
     contentSecurityPolicy: {
       'default-src': "'none'",
-      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' api.tiles.mapbox.com api.mapbox.com",
+      'script-src': "'self' 'unsafe-inline' 'unsafe-eval' api.tiles.mapbox.com api.mapbox.com checkout.stripe.com",
       'font-src': "'self' fonts.gstatic.com",
       'frame-src': "*",
       'connect-src': "'self' a.tiles.mapbox.com",
-      'img-src': "'self' data: a.tiles.mapbox.com",
+      'img-src': "'self' data: a.tiles.mapbox.com q.stripe.com",
       'style-src': "'self' 'unsafe-inline' fonts.googleapis.com api.mapbox.com api.tiles.mapbox.com",
     },
     APP: {

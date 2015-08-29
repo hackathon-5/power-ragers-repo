@@ -22,7 +22,7 @@
 					</div>
 					<div class="small-4 columns">
 						<h4>${{item.price}}</h4>
-						<button class="button radius">Order</button>
+						{{#link-to 'place-order'}}<button class="button radius">Order</button>{{/link-to}}
 					</div>
 				</div>
 			{{/each}}
