@@ -43,7 +43,7 @@ class OrderController {
 	}
 
 
-	public function getOrder()
+	public function getOrders()
 	{
 		// Get truck id
 		if(null === $this->request->get('truckId'))
