@@ -55,12 +55,22 @@ class Utils
 
 	protected function serializePropelChildObjects($child)
 	{
-		if(is_array($child) && $this->isAssocArray($child))
+		if(is_array($child))
 		{
 			$sanatizedOutput = array();
-			foreach($output as $key => $value)
+			if($this->isAssocArray($child))
 			{
-				$sanatizedOutput[lcfirst($key)] = $this->serializePropelOutput($value);
+				foreach($output as $key => $value)
+				{
+					$sanatizedOutput[lcfirst($key)] = $this->serializePropelOutput($value);
+				}
+			}
+			else
+			{
+				foreach($output as $key => $value)
+				{
+					$sanatizedOutput[$key] = $this->serializePropelOutput($value);
+				}
 			}
 		}
 		else
