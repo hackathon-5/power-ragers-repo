@@ -2,9 +2,9 @@
 
 namespace Controller;
 
-use Silex\Application;
+use \Exception;
 use Model\OrderQuery;
-use Exception;
+use Silex\Application;
 
 use Symfony\Component\HttpFoundation\Request;
 
@@ -16,19 +16,20 @@ class TruckController {
 
 	public function __construct($app, $request)
 	{
-		parent::__construct($app);
+		//parent::__construct($app);
 
 		$this->app = $app;
 		$this->request = $request;
 
-		$this->request_body = json_decode($request->getContent());
+		$this->request_body = json_decode($request->getContent(), true);
 	}
 
 	public function getTruck($id)
 	{
 		$orders = OrderQuery::create()
 				->filterByTruckId($id)
-				->find();
+				->find()
+				->toArray();
 
 		if(null === $orders)
 		{
