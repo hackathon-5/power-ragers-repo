@@ -1,0 +1,31 @@
+<section>
+	<div class="row">
+		<div class="small-12 columns">
+			<h2>Mac Daddy's Food Truck</h2>
+			<p>Gourmet mac and cheese served up toy our pleasing. Do you like cheese? Of course you do, so you'll like us.</p>
+			<a>At 123 Main Street right now</a>
+		</div>
+	</div>
+	
+</section>
+
+<section>
+	<div class="row">
+		<div class="small-12 columns">
+			<h3>Menu</h3>
+
+			{{#each menuItems as |item|}}
+				<div class="row">
+					<div class="small-8 columns">
+						<h4>{{item.title}}</h4>
+						<p>{{item.description}}</p>
+					</div>
+					<div class="small-4 columns">
+						<h4>${{item.price}}</h4>
+						<button class="button radius">Order</button>
+					</div>
+				</div>
+			{{/each}}
+		</div>
+	</div>
+</section>
