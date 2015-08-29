@@ -48,12 +48,19 @@ class Utils
 		return $parameters;
 	}
 
-	public function serializePropelChildObjects()
+	public function serializePropelChildObjects($child)
 	{
-		$sanatizedOutput = array();
-		foreach($output as $key => $value)
+		if(is_array($child))
 		{
-			$sanatizedOutput[lcfirst($key)] = $this->serializePropelOutput($value);
+			$sanatizedOutput = array();
+			foreach($output as $key => $value)
+			{
+				$sanatizedOutput[lcfirst($key)] = $this->serializePropelOutput($value);
+			}
+		}
+		else
+		{
+			$sanatizedOutput = $child;
 		}
 		return $sanatizedOutput;
 	}
