@@ -7,29 +7,33 @@ use Symfony\Component\HttpFoundation\Request;
 //use Controller\OrderController;
 //use Controller\TruckController;
 
+
+// Setup baseurl
+$baseurl = '/api';
+
 // // Orders
-// $app->post('/orders', function(Request $request) use ($app) {
+// $app->post($baseurl.'/orders', function(Request $request) use ($app) {
 // 		$controller = new OrderController($app, $request);
 
 // 		$response = new JsonResponse($controller->placeOrder());
 // 		$response->send();
 // });
 
-// $app->get('/orders', function(Request $request) use ($app) {
+// $app->get($baseurl.'/orders', function(Request $request) use ($app) {
 // 		$controller = new OrderController($app, $request);
 
 // 		$response = new JsonResponse($controller->getOrders());
 // 		$response->send();
 // });
 
-// $app->put('/orders/{id}', function(Request $request, $id) use ($app) {
+// $app->put($baseurl.'/orders/{id}', function(Request $request, $id) use ($app) {
 // 		$controller = new OrderController($app, $request);
 
 // 		$response = new JsonResponse($controller->updateOrder($id));
 // 		$response->send();
 // });
 
-// $app->delete('/orders/{id}', function(Request $request, $id) use ($app) {
+// $app->delete($baseurl.'/orders/{id}', function(Request $request, $id) use ($app) {
 // 		$controller = new OrderController($app, $request);
 
 // 		$response = new JsonResponse($controller->deleteOrder($id));
@@ -37,7 +41,7 @@ use Symfony\Component\HttpFoundation\Request;
 // });
 
 
-$app->get('/time', function(Request $request) use ($app) {
+$app->get($baseurl.'/time', function(Request $request) use ($app) {
 		$response = new JsonResponse(array(
 			'time' => time()
 		));
@@ -46,7 +50,7 @@ $app->get('/time', function(Request $request) use ($app) {
 
 
 // // Trucks
-// $app->get('/trucks/{id}', function(Request $request, $id) use ($app) {
+// $app->get($baseurl.'/trucks/{id}', function(Request $request, $id) use ($app) {
 // 		$controller = new OrderController($app, $request);
 
 // 		$response = new JsonResponse($controller->getTruck($id));
