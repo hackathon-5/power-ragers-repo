@@ -1,0 +1,80 @@
+.animation-wrapper {
+	padding: 60px 0;
+	height: 400px;
+	animation: hover 900ms infinite;
+}
+
+img.truck {
+	width: 50%;
+    max-width: 300px;
+    position: absolute;
+    left: 28%;
+    margin: 0 auto;
+    top: 20%;
+    animation: hover 1200ms infinite;
+}
+
+img.wing1 {
+	width: 30%;
+    max-width: 160px;
+    left: 9%;
+    top: 33%;
+    position: absolute;
+    animation: wing-flap-one 600ms infinite ease-in-out;
+}
+
+img.wing2 {
+	width: 22%;
+    max-width: 140px;
+    left: 63%;
+    top: 34%;
+    position: absolute;
+    animation: wing-flap-two 600ms infinite ease-in-out;
+    z-index: -1;
+}
+
+@keyframes wing-flap-one {
+   0% {
+     transform: rotate(0deg);
+     transform-origin: right;
+   }
+
+   50% {
+      transform: rotate(-20deg);
+      transform-origin: right;
+   }
+
+   100% {
+      transform: rotate(0deg);
+      transform-origin: right;
+   }
+}
+@keyframes wing-flap-two {
+   0% {
+     transform: rotate(0deg);
+     transform-origin: left;
+   }
+
+   50% {
+      transform: rotate(20deg);
+      transform-origin: left;
+   }
+
+   100% {
+      transform: rotate(0deg);
+      transform-origin: left;
+   }
+}
+
+@keyframes hover {
+   0% {
+     transform: translateY(0px);
+   }
+
+   50% {
+      transform: translateY(5px);
+   }
+   100% {
+      transform: translateY(0px);
+   }
+}
