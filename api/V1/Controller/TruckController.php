@@ -24,26 +24,6 @@ class TruckController {
 		$this->request_body = json_decode($request->getContent(), true);
 	}
 
-	public function getTruck($id)
-	{
-		$orders = OrderQuery::create()
-				->filterByTruckId($id)
-				->find()
-				->toArray();
-
-		if(null === $orders)
-		{
-			throw new Exception("No orders found for truck $id.", 404);
-		}
-
-		return array(
-			'truck' => array(
-				'order_ids' => $this->app['utils']->listObjectIDs($orders)
-			),
-			'orders' => $orders
-		);
-	}
-
 }
 
 ?>

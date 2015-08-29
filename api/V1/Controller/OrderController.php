@@ -42,6 +42,32 @@ class OrderController {
 		return "Order, $id, deleted successfully.";
 	}
 
+
+	public function getOrder()
+	{
+		// Get truck id
+		if(null === $this->request->get('truckId'))
+		{
+			throw new Exception('Oops, looks like you forgot a truckId :)', 422);
+		}
+		$truckId = $this->request->get('truckId');
+
+		// Get orders for that truck
+		$orders = OrderQuery::create()
+				->filterByTruckId($truckId)
+				->find()
+				->toArray();
+
+		if(null === $orders)
+		{
+			throw new Exception("No orders found for truck $id.", 404);
+		}
+
+		return array(
+			'orders' => $orders
+		);
+	}
+
 	public function placeOrder()
 	{
 		// Make sure request is well formated

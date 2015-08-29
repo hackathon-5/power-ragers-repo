@@ -1,7 +1,6 @@
 <?php
 
 use Controller\OrderController;
-use Controller\TruckController;
 use Controller\UserController;
 use Silex\Application;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -44,15 +43,6 @@ $app->get($baseurl.'/time', function(Request $request) use ($app) {
 		$response = new JsonResponse(array(
 			'time' => time()
 		));
-		$response->send();
-});
-
-
-// Trucks
-$app->get($baseurl.'/trucks/{id}', function(Request $request, $id) use ($app) {
-		$controller = new TruckController($app, $request);
-
-		$response = new JsonResponse($controller->getTruck($id));
 		$response->send();
 });
 
