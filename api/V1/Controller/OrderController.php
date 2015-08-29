@@ -42,8 +42,7 @@ class OrderController {
 	public function placeOrder()
 	{
 		// Make sure request is well formated
-		if(!array_key_exists('order', $this->request_body) ||
-		   !array_key_exists('token', $this->request_body))
+		if(!array_key_exists('order', $this->request_body))
 		{
 			throw new Exception('Missing or malformed request.', 422);
 		}
@@ -52,10 +51,10 @@ class OrderController {
 			'customer_name',
 			'customer_email',
 			'item_name',
-			'price'
+			'price',
+			'token'
 		);
 		$this->app['utils']->verifyInputIsntNull($input, $requiredKeys);
-		$input['token'] - $this->request_body['token'];
 
 		// Create new Order object
 		$order = new Order();
