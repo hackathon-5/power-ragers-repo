@@ -14,6 +14,7 @@
     "qunit": "~1.17.1",
     "foundation": "~5.5.0",
     "mapbox.js": "~2.1.9",
-    "leaflet": "~0.7.3"
+    "leaflet": "~0.7.3",
+    "jquery-mask-library": "0.0.1"
   }
 }
